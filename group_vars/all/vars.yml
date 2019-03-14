@@ -1,5 +1,6 @@
-swarm_token:  "{{ vault_swarm_token }}"
-swarm_server: "{{ vault_swarm_server }}"
+swarm_token:         "{{ vault_swarm_token         }}"
+swarm_manager_token: "{{ vault_swarm_manager_token }}"
+swarm_server:        "{{ vault_swarm_server        }}"
 
 gitlab_user:     "{{ vault_gitlab_user }}"
 gitlab_password: "{{ vault_gitlab_password }}"
