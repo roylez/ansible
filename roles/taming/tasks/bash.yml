@@ -1,0 +1,5 @@
+---
+- name: install bashrc for root
+  copy: src={{item}} dest=/root/.{{ item }}
+  with_items: [bashrc, bash_profile, lscolor256]
+  become: yes

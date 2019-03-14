@@ -1,0 +1,10 @@
+---
+
+user:            roy
+user_groups:
+  - docker
+  - adm
+user_shell:      /usr/bin/zsh
+user_gh_nick:    roylez
+ssh_allow_users: roy
+ssh_port:        22

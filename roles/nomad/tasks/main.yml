@@ -1,0 +1,53 @@
+---
+
+- name: download nomad
+  get_url:
+    url: "{{ nomad_url }}"
+    dest: /root
+
+- name: install
+  unarchive:
+    src: /root/{{ nomad_package }}
+    dest: /usr/local/bin
+    remote_src: yes
+
+- name: make sure /etc/nomad exists
+  file: path=/etc/nomad state=directory
+
+- name: install systemd unit
+  copy:
+    src: nomad.service
+    dest: /etc/systemd/system/nomad.service
+  notify: systemd_reload
+
+- name: install tls ca
+  copy:
+    content: "{{ nomad_ca }}"
+    dest: /etc/nomad/ca.pem
+
+- name: install tls cert
+  copy:
+    content: "{{ nomad_cert }}"
+    dest: /etc/nomad/nomad.pem
+
+- name: install tls key
+  copy:
+    content: "{{ nomad_key }}"
+    dest: /etc/nomad/nomad-key.pem
+
+- name: decide if this is a server
+  local_action: stat path=/root/NOMAD_SERVER
+  register: nomad_server_file
+
+- name: decide if this is a server
+  local_action: stat path=/root/NOMAD_CLIENT
+  register: nomad_client_file
+
+- name: install agent config
+  template:
+    src=agent.hcl.j2
+    dest=/etc/nomad/agent.hcl
+  notify: restart_nomad
+
+- name: enable service
+  service: name=nomad state=started enabled=yes

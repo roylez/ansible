@@ -1,0 +1,4 @@
+---
+
+frp_package_name: "frp_{{ frp_version }}_linux_amd64"
+frp_release_url: "https://github.com/fatedier/frp/releases/download/v{{ frp_version }}/{{ frp_package_name }}.tar.gz"

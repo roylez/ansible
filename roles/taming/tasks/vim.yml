@@ -1,0 +1,5 @@
+---
+
+- name: install vim
+  apt: name=vim
+  become: yes

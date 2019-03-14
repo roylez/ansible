@@ -1,0 +1,11 @@
+- name: login into Gitlab registry
+  docker_login:
+    registry: registry.gitlab.com
+    username: "{{ gitlab_user }}"
+    password: "{{ gitlab_password }}"
+
+- name: copy ssh private key
+  copy: content="{{ ssh_private_key }}" dest="{{ ansible_env.HOME }}/.ssh/{{ ssh_key_name }}" mode=0600
+
+- name: copy ssh public key
+  copy: content="{{ ssh_public_key }}" dest="{{ ansible_env.HOME }}/.ssh/{{ ssh_key_name }}.pub" mode=0644

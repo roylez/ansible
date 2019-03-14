@@ -1,0 +1,19 @@
+#!/usr/bin/env ruby
+# encoding: utf-8
+#
+
+Vagrant.configure("2") do |config|
+  config.vm.box_check_update = false
+
+  config.vm.synced_folder ".", "/root/ansible", type: "rsync", rsync__exclude: ".git/"
+  config.vm.provision "shell", inline: "apt-get -qq update; apt-get -qq install -y ansible"
+
+  config.vm.define(:ubuntu, primary: true) do |config|
+    config.vm.box = "ubuntu/bionic64"
+  end
+
+  config.vm.define(:debian) do |config|
+    config.vm.box = "generic/debian9"
+  end
+
+end

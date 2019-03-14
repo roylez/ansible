@@ -1,0 +1,19 @@
+---
+
+- name: install
+  apt: name=monit
+
+- name: enable service
+  service: name=monit state=started enabled=yes
+
+- name: copy networking monit conf
+  copy: src=networking.monit dest=/etc/monit/conf-available/networking
+
+- name: enable status output
+  blockinfile:
+    dest: /etc/monit/monitrc
+    block: |
+      set httpd port 2812 and
+        use address localhost
+        allow localhost
+  notify: reload_monit

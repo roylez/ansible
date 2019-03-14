@@ -1,0 +1,55 @@
+---
+
+- name: install apt-transport-https
+  apt: name=apt-transport-https
+
+- name: add docker apt-key
+  apt_key: url=https://download.docker.com/linux/ubuntu/gpg state=present
+
+- name: add docker repo
+  when: ansible_distribution_release != "bionic"
+  apt_repository:
+    repo: "deb [arch=amd64] https://download.docker.com/linux/{{ ansible_distribution | lower }} {{ ansible_distribution_release }} stable"
+    state: present
+
+- name: add docker repo for Bionic
+  when: ansible_distribution_release == "bionic"
+  apt_repository:
+    repo: "deb [arch=amd64] https://download.docker.com/linux/{{ ansible_distribution | lower }} artful stable"
+    state: present
+
+- name: install docker
+  apt: name=docker-ce state=present
+
+# aufs no more supported for Linux 4.0.x
+- name: delete aufs
+  file: path=/var/lib/docker/aufs state=absent
+
+- name: start docker daemon
+  service: name=docker state=started enabled=yes
+
+- name: install docker-compose
+  get_url:
+    dest: /usr/local/bin/docker-compose
+    url:  "https://github.com/docker/compose/releases/download/{{ docker_compose_version }}/docker-compose-{{ ansible_system }}-{{ ansible_architecture }}"
+    mode: 0755
+
+- name: ensure zfunctions exists
+  file: path={{ ansible_env.HOME }}/.zfunctions state=directory
+
+- name: install docker-compose completions
+  get_url:
+    dest: "{{ ansible_env.HOME }}/.zfunctions/_docker_compose"
+    url:  https://github.com/docker/compose/raw/master/contrib/completion/zsh/_docker-compose
+
+- name: copy docker clean up script
+  copy: src=docker_clean.sh dest=/usr/local/bin/docker-clean mode=0755
+
+- name: create cron job to clean
+  cron:
+    name: "docker cleanup"
+    minute: 13
+    job: /usr/local/bin/docker-clean
+
+- name: install docker_py
+  apt: name=python-docker

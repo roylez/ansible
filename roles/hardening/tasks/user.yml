@@ -1,0 +1,24 @@
+---
+
+- name: user | create user
+  user: name={{ user }} state=present shell={{ user_shell }} skeleton=/etc/skel
+
+- name: user | enable sudo
+  template: src=sudoer dest=/etc/sudoers.d/{{ user }}
+
+- name: user | import ssh key
+  authorized_key: user={{ user }} key=https://github.com/{{ user_gh_nick }}.keys
+
+- name: install shell config files
+  copy: src={{ item }} dest=/home/{{ user }}/.{{ item }}
+  with_items: [bashrc, bash_profile, lscolor256]
+
+- name: install zshrc
+  get_url:
+    url: https://github.com/roylez/dotfiles/raw/master/.zshrc
+    dest: "/home/{{ user }}/.zshrc"
+    force: yes
+
+- name: append groups to users
+  with_items: '{{ user_groups  }}'
+  user: name={{ user }} groups={{ item }} append=yes

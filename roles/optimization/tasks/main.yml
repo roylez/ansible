@@ -1,0 +1,19 @@
+---
+- include: resolvconf.yml
+  when: ansible_os_family == 'Debian'
+
+- name: install packages
+  apt: name={{ vps_packages }}
+
+- name: sysctl tweaks
+  sysctl: name={{ item.key }} value={{ item.value }} reload=yes
+  with_dict: "{{ sysctl_tweaks }}"
+
+- name: make ipv4 preferred by getaddrinfo
+  lineinfile:
+    name: /etc/gai.conf
+    line: "precedence ::ffff:0:0/96  100"
+
+- include: swap.yml
+
+- include: bbr.yml

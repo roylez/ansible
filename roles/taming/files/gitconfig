@@ -1,0 +1,30 @@
+[color]  # Ensure we get color
+    diff   = always
+    branch = auto
+    status = auto
+    grep   = always
+[push]
+    default = tracking
+[alias]
+    a   = add
+    b   = branch
+    c   = commit
+    co  = checkout
+    d   = diff
+    des = describe --tags
+    l   = log
+    lc  = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset %Cblue%cn%Creset' --abbrev-commit --date=relative
+    la  = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset %Cblue%cn%Creset' --abbrev-commit --date=relative --all
+    m   = merge
+    pl  = pull
+    pu  = push
+    s   = status -sb
+    t   = tag
+    untrack = rm -r --cached
+    merge-branch-file = checkout --merge
+    rb  = rebase
+[core]
+    pager = cat
+    excludesfile = ~/.gitignore
+[status]
+    submoduleSummary = true

@@ -1,0 +1,27 @@
+---
+
+- name: download from github release
+  get_url:
+    url: "{{ frp_release_url }}"
+    dest: "/root/"
+
+- name: make dir for unpacking
+  file: path=/root/tmp state=directory
+
+- name: unpack
+  unarchive:
+    src: /root/{{ frp_package_name }}.tar.gz
+    dest: /root/tmp
+    remote_src: yes
+
+- name: install
+  command: cp /root/tmp/{{ frp_package_name }}/frps /usr/local/bin
+
+- name: install default setting
+  copy: src=frps.ini dest=/etc/
+
+- name: install service
+  copy: src=frps.service dest=/etc/systemd/system/
+
+- name: start it
+  service: name=frps state=started enabled=yes

@@ -1,0 +1,4 @@
+---
+
+- name: reload_monit
+  service: name=monit state=reloaded

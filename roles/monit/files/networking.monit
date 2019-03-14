@@ -1,0 +1,5 @@
+ check host google with address google.com
+   group networking
+   if failed ping4 timeout 10 seconds then exec "/sbin/shutdown -r now"
+   if failed port 443 protocol https retry 8 then exec "/sbin/shutdown -r now"
+   if failed host 8.8.8.8 port 53 type udp protocol dns timeout 3 seconds retry 10 then exec "/sbin/shutdown -r now"

@@ -1,0 +1,14 @@
+---
+- name: install zsh
+  apt: name=zsh
+  become: yes
+
+- name: copy configuration
+  get_url:
+    url: https://github.com/roylez/dotfiles/raw/master/.zshrc
+    dest: "{{ ansible_env.HOME }}/.zshrc"
+    force: yes
+
+- name: change default shell to zsh
+  user: name={{ ansible_user_id }} shell=/usr/bin/zsh
+  become: yes

@@ -1,0 +1,7 @@
+---
+
+dependencies:
+  - { role: docker }
+  - { role: webhook }
+  - { role: monit }
+  - { role: access }

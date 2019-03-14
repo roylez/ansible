@@ -1,0 +1,14 @@
+---
+
+- include: timezone.yml
+  become: yes
+
+- include: bash.yml
+
+- include: vim.yml
+
+- when: tame_zsh
+  include: zsh.yml
+
+- name: copy git config
+  copy: src=gitconfig dest=~/.gitconfig

@@ -1,0 +1,7 @@
+---
+
+- name: restart_webhook
+  command: systemctl restart webhook
+
+- name: reload_monit
+  service: name=monit state=reloaded

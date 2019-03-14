@@ -1,0 +1,33 @@
+bind_addr = "0.0.0.0"
+data_dir = "/var/lib/nomad/"
+name = "{{ ansible_nodename }}"
+
+advertise {
+  http = "{{ ansible_default_ipv4.address }}"
+  rpc  = "{{ ansible_default_ipv4.address }}"
+  serf = "{{ ansible_default_ipv4.address }}"
+}
+
+tls {
+  http = true
+  rpc  = true
+  ca_file   = "/etc/nomad/ca.pem"
+  cert_file = "/etc/nomad/nomad.pem"
+  key_file  = "/etc/nomad/nomad-key.pem"
+}
+
+{% if nomad_server_file.stat.exists %}
+server {
+  enabled          = true
+  bootstrap_expect = 3
+  encrypt          = "{{ gossip_key }}"
+  retry_join       = ["{{ nomad_server }}"]
+}
+{% endif %}
+
+{% if nomad_client_file.stat.exists or not nomad_server_file.stat.exists %}
+client {
+  enabled = true
+  servers = ["{{ nomad_server }}"]
+}
+{% endif %}

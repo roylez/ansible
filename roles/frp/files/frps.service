@@ -1,0 +1,9 @@
+[Unit]
+Description=A fast reverse proxy to help you expose a local server
+Documentation=https://github.com/fatedier/frp
+
+[Service]
+ExecStart=/usr/local/bin/frps -c /etc/frps.ini
+
+[Install]
+WantedBy=multi-user.target

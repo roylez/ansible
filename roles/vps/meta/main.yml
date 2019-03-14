@@ -1,0 +1,7 @@
+---
+
+dependencies:
+  - role: docker
+  - role: optimization
+  - role: hardening
+  - role: taming

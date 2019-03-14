@@ -1,0 +1,20 @@
+- name: decide if this is a manager
+  local_action: stat path=/root/SWARM_MANAGER
+  register: swarm_manager_file
+
+- name: join swarm as manager
+  command: docker swarm join --token {{ swarm_manager_token }} {{ swarm_server }}
+  ignore_errors: yes
+  when: swarm_manager_file.stat.exists
+
+- name: join swarm
+  command: docker swarm join --token {{ swarm_token }} {{ swarm_server }}
+  ignore_errors: yes
+  when: not swarm_manager_file.stat.exists
+
+- name: ensure webhook is not installed
+  service:
+    name: webhook
+    state: stopped
+    enabled: no
+  ignore_errors: yes

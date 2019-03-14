@@ -1,0 +1,13 @@
+version: '2.1'
+
+services:
+  ss:
+    image: {{ image_url }}
+    network_mode: host
+    restart: always
+    env_file: ss.env
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "5m"
+        max-file: "5"

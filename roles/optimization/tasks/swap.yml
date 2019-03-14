@@ -1,0 +1,26 @@
+
+- stat: path=/var/swap.img
+  register: swap_file
+
+- name: create swap.img
+  file: path=/var/swap.img state=touch mode=0600
+  when: swap_file.stat.exists == False
+  register: swap_created
+
+- name: zero fill swap.img
+  command: dd if=/dev/zero of=/var/swap.img bs=1024k count=1000
+  when: swap_created.changed
+
+- name: mkswap
+  command: mkswap /var/swap.img
+  when: swap_created.changed
+
+- name: swap on
+  command: swapon /var/swap.img
+  when: swap_created.changed
+
+- name: update fstab
+  lineinfile: 
+    dest: /etc/fstab
+    line: "/var/swap.img    none    swap    sw    0    0"
+

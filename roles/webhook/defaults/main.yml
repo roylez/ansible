@@ -1,0 +1,5 @@
+webhook_version:      2.6.8
+webhook_enable:       true
+webhook_package_name: webhook-linux-amd64
+webhook_port:         6006
+

@@ -1,0 +1,10 @@
+---
+
+- name: ensure resolvconf is not installed
+  apt: name=resolvconf state=absent
+
+- name: ensure systemd-resolved is disabled
+  service: name=systemd-resolved enabled=no state=stopped
+
+- name: use fast DNS
+  copy: dest=/etc/resolv.conf src=resolv.conf

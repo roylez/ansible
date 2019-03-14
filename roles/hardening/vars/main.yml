@@ -1,0 +1,9 @@
+ssh_allow_users: "{% if ssh_allow_users %}{{ssh_allow_users}}{% else %}{{ user }}{% endif %}"
+
+packages:
+  - fail2ban
+  - unattended-upgrades
+
+remove_packages:
+  - snapd
+  - postfix

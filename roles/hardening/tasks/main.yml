@@ -1,0 +1,17 @@
+---
+# http://www.codelitt.com/blog/my-first-10-minutes-on-a-server-primer-for-securing-ubuntu/
+
+- name: install stuff
+  apt: name={{ packages }}
+
+- name: enable apt unattended security update
+  copy: src={{ item }} dest=/etc/apt/apt.conf.d/
+  with_items: [ 10periodic, 50unattended-upgrades ]
+
+- include: user.yml
+
+- include: sshd.yml
+
+- name: remove black listed packages
+  apt: name={{ remove_packages }} state=absent
+  when: ansible_distribution == "Ubuntu"

@@ -1,0 +1,5 @@
+---
+
+webhook_package_url: "https://github.com/adnanh/webhook/releases/download/{{ webhook_version }}/{{ webhook_package_name }}.tar.gz"
+
+webhook_service_file: /etc/systemd/system/webhook.service

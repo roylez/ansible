@@ -1,0 +1,5 @@
+---
+
+- name: copy {{ timezone }} zoneinfo
+  when: ansible_os_family == 'Debian'
+  file: state=link src=/usr/share/zoneinfo/{{ timezone }} dest=/etc/localtime force=yes

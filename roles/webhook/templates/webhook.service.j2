@@ -1,0 +1,9 @@
+[Unit]
+Description=Small server for creating HTTP endpoints (hooks)
+Documentation=https://github.com/adnanh/webhook/
+
+[Service]
+ExecStart=/usr/local/bin/webhook -nopanic -hotreload -verbose -port {{ webhook_port }} -hooks /etc/webhook.conf
+
+[Install]
+WantedBy=multi-user.target

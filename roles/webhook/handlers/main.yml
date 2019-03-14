@@ -1,0 +1,6 @@
+- name: systemd_daemon_reload
+  command: systemctl daemon-reload
+  notify: restart_webhook
+
+- name: restart_webhook
+  command: systemctl restart webhook

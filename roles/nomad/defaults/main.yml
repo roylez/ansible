@@ -1,0 +1,5 @@
+nomad_version: 0.8.7
+
+nomad_server: api.cloaked.me
+
+gossip_key: "lwEZtndpkEGXvB+0jrhxlA=="
