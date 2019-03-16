@@ -12,9 +12,3 @@
   ignore_errors: yes
   when: not swarm_manager_file.stat.exists
 
-- name: ensure webhook is not installed
-  service:
-    name: webhook
-    state: stopped
-    enabled: no
-  ignore_errors: yes
