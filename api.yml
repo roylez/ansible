@@ -3,4 +3,5 @@
   roles:
     - vps
     - swarm
+    - webhook
     - access
