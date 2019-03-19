@@ -6,5 +6,11 @@ user_groups:
   - adm
 user_shell:      /usr/bin/zsh
 user_gh_nick:    roylez
-ssh_allow_users: roy
-ssh_port:        22
+
+sshd_options:
+  Port:                   22
+  ClientAliveInterval:    60
+  PasswordAuthentication: "no"
+  PubkeyAuthentication:   "yes"
+  PermitRootLogin:        "no"
+  AllowUsers:             "{{ user }}"

@@ -8,10 +8,17 @@
   copy: src={{ item }} dest=/etc/apt/apt.conf.d/
   with_items: [ 10periodic, 50unattended-upgrades ]
 
-- include: user.yml
-
-- include: sshd.yml
+- name: update sshd_config
+  lineinfile:
+    dest: /etc/ssh/sshd_config
+    line: "{{ item.key }} {{ item.value }}"
+    regexp: ^{{ item.key }}\s+
+  with_dict: "{{ sshd_options }}"
+  notify: restart_sshd
 
 - name: remove black listed packages
   apt: name={{ remove_packages }} state=absent
   when: ansible_distribution == "Ubuntu"
+
+- include: user.yml
+
