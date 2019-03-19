@@ -3,6 +3,11 @@
 #
 
 Vagrant.configure("2") do |config|
+  # do not create console log for vms
+  config.vm.provider "virtualbox" do |vb|
+    vb.customize [ "modifyvm", :id, "--uartmode1", "disconnected" ]
+  end
+
   config.vm.box_check_update = false
 
   config.vm.synced_folder ".", "/root/ansible", type: "rsync", rsync__exclude: ".git/"
