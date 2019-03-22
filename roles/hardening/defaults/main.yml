@@ -1,6 +1,5 @@
 ---
 
-user:            roy
 user_groups:
   - docker
   - adm

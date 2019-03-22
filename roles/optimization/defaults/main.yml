@@ -9,6 +9,8 @@ vps_packages:
   - iftop
   - silversearcher-ag
 
+update_dns: yes
+
 sysctl_tweaks:
   # max open files
   fs.file-max: 1024000

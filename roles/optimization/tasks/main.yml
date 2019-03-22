@@ -1,6 +1,6 @@
 ---
 - include: resolvconf.yml
-  when: ansible_os_family == 'Debian'
+  when: ansible_os_family == 'Debian' and update_dns
 
 - name: install packages
   apt: name={{ vps_packages }}
