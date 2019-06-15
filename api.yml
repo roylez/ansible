@@ -4,4 +4,5 @@
     - vps
     - swarm
     - webhook
+    - restic
     - access

@@ -1,0 +1,20 @@
+---
+
+- name: make dir for unpacking
+  file: path=/root/tmp state=directory
+
+- name: download binary
+  get_url:
+    url: "{{ restic_release_url }}"
+    dest: "/root/tmp"
+
+- name: unpack
+  command: bzip2 -d /root/tmp/{{ restic_package_name }}.bz2
+
+- name: install
+  copy:
+    src: /root/tmp/{{ restic_package_name }}
+    dest: /usr/local/bin/restic
+    remote_src: yes
+    mode: 0700
+

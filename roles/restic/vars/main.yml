@@ -1,0 +1,4 @@
+---
+
+restic_package_name: "restic_{{ version }}_linux_amd64"
+restic_release_url: "https://github.com/restic/restic/releases/download/v{{ version }}/{{ restic_package_name }}.bz2"

@@ -11,7 +11,7 @@ Vagrant.configure("2") do |config|
   config.vm.box_check_update = false
 
   config.vm.synced_folder ".", "/root/ansible", type: "rsync", rsync__exclude: ".git/"
-  config.vm.provision "shell", inline: "apt-get -qq update; apt-get -qq install -y ansible"
+  config.vm.provision "shell", inline: "apt-get -qq update; DEBIAN_FRONTEND=noninteractive apt-get -yq install ansible"
 
   config.vm.define(:ubuntu, primary: true) do |config|
     config.vm.box = "ubuntu/bionic64"
