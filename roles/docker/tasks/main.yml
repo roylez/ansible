@@ -25,6 +25,12 @@
 - name: delete aufs
   file: path=/var/lib/docker/aufs state=absent
 
+- name: config docker daemon
+  copy:
+    src: daemon.json
+    dest: /etc/docker/daemon.json
+  notify: reload_docker
+
 - name: start docker daemon
   service: name=docker state=started enabled=yes
 
