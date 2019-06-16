@@ -10,6 +10,8 @@
 
 - name: unpack
   command: bzip2 -d /root/tmp/{{ restic_package_name }}.bz2
+  args:
+    creates: /root/tmp/{{ restic_package_name }}
 
 - name: install
   copy:
