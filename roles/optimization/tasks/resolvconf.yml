@@ -6,5 +6,11 @@
 - name: ensure systemd-resolved is disabled
   service: name=systemd-resolved enabled=no state=stopped
 
+- name: create dhclient hook to disable DNS update
+  copy:
+    dest: /etc/dhcp/dhclient-enter-hooks.d/nodnsupdate
+    src: nodnsupdate
+    mode: 0770
+
 - name: use fast DNS
   copy: dest=/etc/resolv.conf src=resolv.conf
