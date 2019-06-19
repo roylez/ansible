@@ -46,3 +46,7 @@ sysctl_tweaks:
   net.ipv4.tcp_wmem: 4096 65536 67108864
   # turn on path MTU discovery
   net.ipv4.tcp_mtu_probing: 1
+  # SACK panic
+  # CVE-2019-11477, CVE-2019-11478, CVE-2019-11479
+  # https://www.ibm.com/developerworks/cn/linux/l-tcp-sack/
+  net.ipv4.tcp_sack: 0
