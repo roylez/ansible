@@ -41,9 +41,10 @@ sysctl_tweaks:
   # max timewait sockets held by system simultaneously
   net.ipv4.tcp_max_tw_buckets: 5000
   # TCP receive buffer
-  net.ipv4.tcp_rmem: 4096 87380 67108864
+  # https://blog.cloudflare.com/the-story-of-one-latency-spike/
+  net.ipv4.tcp_rmem: 4096 2097152 10485760
   # TCP write buffer
-  net.ipv4.tcp_wmem: 4096 65536 67108864
+  net.ipv4.tcp_wmem: 4096 2097152 10485760
   # turn on path MTU discovery
   net.ipv4.tcp_mtu_probing: 1
   # SACK panic
