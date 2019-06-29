@@ -10,6 +10,5 @@
 - name: change sysctl
   sysctl: name={{ item.name }} value={{ item.value }} reload=no
   with_items:
-    - { name: net.core.default_qdisc,             value: fq  }
-    - { name: net.ipv4.tcp_congestion_control,    value: bbr }
-    - { name: net.ipv4.tcp_slow_start_after_idle, value: 0   }
+    - { name: net.core.default_qdisc,             value: fq_codel }
+    - { name: net.ipv4.tcp_congestion_control,    value: bbr      }
