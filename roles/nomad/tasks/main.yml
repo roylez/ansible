@@ -41,6 +41,7 @@
 
 - name: figure out if need to change advertise IP
   shell: cat /root/NOMAD_ADVERTISE
+  ignore_errors: yes
   register: nomad_advertise_ip
 
 - name: decide if this is a client
