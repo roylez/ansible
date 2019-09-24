@@ -3,9 +3,9 @@ data_dir = "/var/lib/nomad/"
 name = "{{ ansible_nodename }}"
 
 advertise {
-  http = "{{ nomad_ip }}"
-  rpc  = "{{ nomad_ip }}"
-  serf = "{{ nomad_ip }}"
+  http = "{{ nomad.advertise }}"
+  rpc  = "{{ nomad.advertise }}"
+  serf = "{{ nomad.advertise }}"
 }
 
 tls {
@@ -16,7 +16,7 @@ tls {
   key_file  = "/etc/nomad/nomad-key.pem"
 }
 
-{% if nomad_is_server %}
+{% if nomad.server %}
 server {
   enabled          = true
   bootstrap_expect = 3
@@ -25,9 +25,10 @@ server {
 }
 {% endif %}
 
-{% if nomad_is_client %}
+{% if nomad.client %}
 client {
-  enabled = true
-  servers = ["{{ nomad_server }}"]
+  enabled    = true
+  servers    = ["{{ nomad_server }}"]
+  node_class = "{{ nomad.node_class | default("") }}"
 }
 {% endif %}

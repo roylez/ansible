@@ -4,9 +4,3 @@ nomad_package: "nomad_{{ nomad_version }}_linux_amd64.zip"
 nomad_url: "https://releases.hashicorp.com/nomad/{{ nomad_version }}/{{ nomad_package }}"
 
 nomad_local: "{{ { 'server':false, 'client':true, 'advertise':ansible_default_ipv4.address } | combine( ansible_local.nomad | default({}) ) }}"
-
-nomad_ip: "{{ nomad_local.advertise }}"
-
-nomad_is_server: "{{ nomad_local.server }}"
-
-nomad_is_client: "{{ nomad_local.client }}"
