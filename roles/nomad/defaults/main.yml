@@ -1,5 +1,5 @@
-nomad_version: 0.8.7
+nomad_version: 0.9.5
 
-nomad_server: api.cloaked.me
+nomad_server: o1.roylez.info
 
 gossip_key: "lwEZtndpkEGXvB+0jrhxlA=="

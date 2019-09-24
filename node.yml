@@ -2,4 +2,4 @@
   remote_user: '{{ remote_user }}'
   roles:
     - vps
-    - swarm
+    - nomad
