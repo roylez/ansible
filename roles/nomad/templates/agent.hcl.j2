@@ -3,9 +3,9 @@ data_dir = "/var/lib/nomad/"
 name = "{{ ansible_nodename }}"
 
 advertise {
-  http = "{{ ansible_default_ipv4.address }}"
-  rpc  = "{{ ansible_default_ipv4.address }}"
-  serf = "{{ ansible_default_ipv4.address }}"
+  http = "{{ nomad_ip }}"
+  rpc  = "{{ nomad_ip }}"
+  serf = "{{ nomad_ip }}"
 }
 
 tls {

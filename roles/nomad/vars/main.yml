@@ -2,3 +2,5 @@
 nomad_package: "nomad_{{ nomad_version }}_linux_amd64.zip"
 
 nomad_url: "https://releases.hashicorp.com/nomad/{{ nomad_version }}/{{ nomad_package }}"
+
+nomad_ip: "{% if nomad_advertise_ip.stdout %}{{ nomad_advertise_ip.stdout }}{% else %}{{ ansible_default_ipv4.address }}{% endif %}"

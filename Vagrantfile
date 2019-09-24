@@ -2,6 +2,18 @@
 # encoding: utf-8
 #
 
+TAME_SCRIPT = <<-SHELL
+    echo "Fixing hard coded DNS"
+    sed -i -e "s/^#\\?DNS=.*$/DNS=/g;s/^#\\?DNSSEC=.*$/DNSSEC=no/g" /etc/systemd/resolved.conf
+    systemctl restart systemd-resolved
+
+    echo "Use local mirror for APT"
+    sed -i 's/us.archive/au.archive/g' /etc/apt/sources.list
+
+    echo "Install ansible"
+    apt-get -qq update; DEBIAN_FRONTEND=noninteractive apt-get -yq install ansible
+SHELL
+
 Vagrant.configure("2") do |config|
   # do not create console log for vms
   config.vm.provider "virtualbox" do |vb|
@@ -16,12 +28,7 @@ Vagrant.configure("2") do |config|
   config.vm.box_check_update  = false
 
   config.vm.synced_folder ".", "/root/ansible", type: "rsync", rsync__exclude: ".git/"
-  config.vm.provision "shell", inline: <<-SHELL
-    echo "Fixing hard coded DNS"
-    sed -i -e "s/^#\\?DNS=.*$/DNS=/g;s/^#\\?DNSSEC=.*$/DNSSEC=no/g" /etc/systemd/resolved.conf
-    systemctl restart systemd-resolved
-    apt-get -qq update; DEBIAN_FRONTEND=noninteractive apt-get -yq install ansible
-  SHELL
+  config.vm.provision "shell", inline: TAME_SCRIPT
 
   config.vm.define(:ubuntu, primary: true) do |config|
     config.vm.provider "virtualbox" do |_, override|
