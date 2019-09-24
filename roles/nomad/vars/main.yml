@@ -3,8 +3,8 @@ nomad_package: "nomad_{{ nomad_version }}_linux_amd64.zip"
 
 nomad_url: "https://releases.hashicorp.com/nomad/{{ nomad_version }}/{{ nomad_package }}"
 
-nomad_ip: "{% if ansible_local.nomad.advertise %}{{ ansible_local.nomad.advertise }}{% else %}{{ ansible_default_ipv4.address }}{% endif %}"
+nomad_ip: "{{ ansible_local.nomad.advertise if (ansible_local |json_query('nomad.advertise')) else ansible_default_ipv4.address }}"
 
-nomad_is_server: "{{ ansible_local.nomad.server }}"
+nomad_is_server: "{{ ansible_local | json_query('nomad.server') }}"
 
-nomad_is_client: "{{ ansible_local.nomad.client or not ansible_local.nomad.server }}"
+nomad_is_client: "{{ ( ansible_local | json_query('nomad.client') ) or not ( ansible_local | json_query('nomad.server') }}"
