@@ -16,7 +16,7 @@ tls {
   key_file  = "/etc/nomad/nomad-key.pem"
 }
 
-{% if nomad_server_file.stat.exists %}
+{% if nomad_is_server %}
 server {
   enabled          = true
   bootstrap_expect = 3
@@ -25,7 +25,7 @@ server {
 }
 {% endif %}
 
-{% if nomad_client_file.stat.exists or not nomad_server_file.stat.exists %}
+{% if nomad_is_client %}
 client {
   enabled = true
   servers = ["{{ nomad_server }}"]
