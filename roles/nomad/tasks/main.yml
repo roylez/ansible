@@ -25,15 +25,29 @@
     content: "{{ nomad_ca }}"
     dest: /etc/nomad/ca.pem
 
-- name: install tls cert
+- name: install tls server cert
+  when: nomad.server
   copy:
-    content: "{{ nomad_cert }}"
-    dest: /etc/nomad/nomad.pem
+    content: "{{ nomad_server_cert }}"
+    dest: /etc/nomad/server.pem
 
-- name: install tls key
+- name: install tls server key
+  when: nomad.server
   copy:
-    content: "{{ nomad_key }}"
-    dest: /etc/nomad/nomad-key.pem
+    content: "{{ nomad_server_key }}"
+    dest: /etc/nomad/server-key.pem
+
+- name: install tls client cert
+  when: not nomad.server
+  copy:
+    content: "{{ nomad_client_cert }}"
+    dest: /etc/nomad/client.pem
+
+- name: install tls client key
+  when: not nomad.server
+  copy:
+    content: "{{ nomad_client_key }}"
+    dest: /etc/nomad/client-key.pem
 
 - name: install agent config
   template:

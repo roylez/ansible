@@ -12,8 +12,8 @@ tls {
   http = true
   rpc  = true
   ca_file   = "/etc/nomad/ca.pem"
-  cert_file = "/etc/nomad/nomad.pem"
-  key_file  = "/etc/nomad/nomad-key.pem"
+  cert_file = "/etc/nomad/{{ "server" if nomad.server else "client" }}.pem"
+  key_file  = "/etc/nomad/{{ "server" if nomad.server else "client" }}-key.pem"
 }
 
 {% if nomad.server %}
