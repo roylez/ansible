@@ -40,7 +40,7 @@
   register: nomad_server_file
 
 - name: figure out if need to change advertise IP
-  shell: cat /root/NOMAD_ADVERTISE
+  shell: cat /root/NOMAD_ADVERTISE 2>/dev/null
   ignore_errors: yes
   register: nomad_advertise_ip
 
