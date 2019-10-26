@@ -5,7 +5,6 @@
   with_items:
     - iptables
     - iptables-persistent
-    - netfilter-persistent
 
 # https://javapipe.com/blog/iptables-ddos-protection/
 - name: iptables DDos mangle Rules
