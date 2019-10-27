@@ -12,7 +12,7 @@
     name: DDoS protection mangle
     table: mangle
     rules: |
-      -A PREROUTING -m conntrack --ctstate INVALID -j DROP
+      -A PREROUTING -p tcp -m conntrack --ctstate INVALID -j DROP
       -A PREROUTING -p tcp ! --syn -m conntrack --ctstate NEW -j DROP
       -A PREROUTING -p tcp -m conntrack --ctstate NEW -m tcpmss ! --mss 536:65535 -j DROP
       -A PREROUTING -p tcp -m tcp --tcp-flags FIN,SYN,RST,PSH,ACK,URG NONE -j DROP
@@ -28,7 +28,7 @@
       -A PREROUTING -p tcp -m tcp --tcp-flags FIN,SYN,RST,PSH,ACK,URG FIN,PSH,URG -j DROP
       -A PREROUTING -p tcp -m tcp --tcp-flags FIN,SYN,RST,PSH,ACK,URG FIN,SYN,PSH,URG -j DROP
       -A PREROUTING -p tcp -m tcp --tcp-flags FIN,SYN,RST,PSH,ACK,URG FIN,SYN,RST,ACK,URG -j DROP
-      -A PREROUTING -f -j DROP
+      -A PREROUTING -p tcp -f -j DROP
 
 - name: iptables DDos filter Rules
   iptables_raw:
