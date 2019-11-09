@@ -7,16 +7,8 @@
   apt_key: url=https://download.docker.com/linux/ubuntu/gpg state=present
 
 - name: add docker repo
-  when: ansible_distribution_release != "bionic"
   apt_repository:
     repo: "deb [arch=amd64] https://download.docker.com/linux/{{ ansible_distribution | lower }} {{ ansible_distribution_release }} stable"
-    state: present
-  register: docker_repo_added
-
-- name: add docker repo for Bionic
-  when: ansible_distribution_release == "bionic"
-  apt_repository:
-    repo: "deb [arch=amd64] https://download.docker.com/linux/{{ ansible_distribution | lower }} artful stable"
     state: present
   register: docker_repo_added
 
