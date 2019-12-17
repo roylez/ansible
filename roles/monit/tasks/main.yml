@@ -9,6 +9,12 @@
 - name: copy networking monit conf
   copy: src=networking.monit dest=/etc/monit/conf-available/networking
 
+- name: enable netowrking monitoring
+  file:
+    src:   /etc/monit/conf-enabled/networking
+    dest:  /etc/monit/conf-available/networking
+    state: link
+
 - name: enable status output
   blockinfile:
     dest: /etc/monit/monitrc

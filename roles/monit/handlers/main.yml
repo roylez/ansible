@@ -1,4 +1,4 @@
 ---
 
 - name: reload_monit
-  service: name=monit state=reloaded
+  command: monit reload
