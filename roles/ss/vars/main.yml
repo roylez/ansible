@@ -1,5 +1,0 @@
----
-
-app_dir: "{{ ansible_env.HOME }}/{{ app }}"
-
-image_url: "{{ cloak_image_url }}"

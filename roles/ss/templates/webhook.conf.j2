@@ -1,8 +1,0 @@
-# vim: ft=yaml
----
-- id: redeploy
-  execute-command: {{ app_dir }}/deploy.sh
-  command-working-directory: {{ app_dir }}
-  pass-arguments-to-command:
-    - source: payload
-      name: build_id
