@@ -8,12 +8,14 @@
 
 - name: copy networking monit conf
   copy: src=networking.monit dest=/etc/monit/conf-available/networking
+  notify: reload_monit
 
 - name: enable netowrking monitoring
   file:
     src:   /etc/monit/conf-available/networking
     dest:  /etc/monit/conf-enabled/networking
     state: link
+  notify: reload_monit
 
 - name: enable status output
   blockinfile:
