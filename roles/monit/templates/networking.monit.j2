@@ -1,0 +1,9 @@
+ check host cloudflare with address 1.1.1.1
+   group networking
+   if failed ping4 timeout 10 seconds then exec "/sbin/shutdown -r now"
+   if failed port 53 type udp protocol dns timeout 3 seconds retry 10 then exec "/sbin/shutdown -r now"
+
+check network {{ ansible_default_ipv4.interface }} with interface {{ ansible_default_ipv4.interface }}
+  start program = "/usr/sbin/service networking start"
+  stop  program = "/usr/sbin/service networking stop"
+  if failed link then restart
