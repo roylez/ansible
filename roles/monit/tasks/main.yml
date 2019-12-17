@@ -11,8 +11,8 @@
 
 - name: enable netowrking monitoring
   file:
-    src:   /etc/monit/conf-enabled/networking
-    dest:  /etc/monit/conf-available/networking
+    src:   /etc/monit/conf-available/networking
+    dest:  /etc/monit/conf-enabled/networking
     state: link
 
 - name: enable status output
