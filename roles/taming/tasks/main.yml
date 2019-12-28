@@ -1,7 +1,9 @@
 ---
 
 - include: timezone.yml
-  become: yes
+
+- include: Ubuntu.yml
+  when: ansible_distribution == "Ubuntu"
 
 - include: bash.yml
 

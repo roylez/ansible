@@ -1,0 +1,13 @@
+---
+
+- name: forbid motd-news to call home
+  lineinfile:
+    dest: /etc/default/motd-news
+    line: "ENABLED=0"
+    regexp: ^ENABLED=
+
+- name: disable motd-news timer
+  systemd:
+    name: motd-news.timer
+    state: stopped
+    enabled: no
