@@ -1,4 +1,0 @@
-- hosts: '{{ hosts }}'
-  remote_user: '{{ remote_user }}'
-  roles:
-    - frp
