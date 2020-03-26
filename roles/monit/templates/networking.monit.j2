@@ -1,4 +1,4 @@
- check host cloudflare with address 1.1.1.1
+ check host Google with address 8.8.8.8
    group networking
    if failed ping4 timeout 10 seconds then exec "/sbin/shutdown -r now"
    if failed port 53 type udp protocol dns timeout 3 seconds retry 10 then exec "/sbin/shutdown -r now"
