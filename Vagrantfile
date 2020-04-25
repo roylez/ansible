@@ -14,14 +14,21 @@ TAME_SCRIPT = <<-SHELL
     apt-get -qq update; DEBIAN_FRONTEND=noninteractive apt-get -yq install ansible
 SHELL
 
+IMAGES = {
+  ubuntu: {
+    virtualbox: "ubuntu/bionic64",
+    libvirt:    "generic/ubuntu1804",
+  },
+  debian: {
+    virtualbox: "generic/debian9",
+    libvirt:    "debian/stretch64",
+  }
+}
+
 Vagrant.configure("2") do |config|
   # do not create console log for vms
-  config.vm.provider "virtualbox" do |vb|
-    vb.customize [ "modifyvm", :id, "--uartmode1", "disconnected" ]
-  end
-  config.vm.provider "libvirt" do |v|
-    v.graphics_type = "none"
-  end
+  config.vm.provider "virtualbox" { |v| v.customize [ "modifyvm", :id, "--uartmode1", "disconnected" ] }
+  config.vm.provider "libvirt"    { |v| v.graphics_type = "none" }
 
   config.nfs.functional       = false
   config.nfs.verify_installed = false
@@ -30,22 +37,13 @@ Vagrant.configure("2") do |config|
   config.vm.synced_folder ".", "/root/ansible", type: "rsync", rsync__exclude: ".git/"
   config.vm.provision "shell", inline: TAME_SCRIPT
 
-  config.vm.define(:ubuntu, primary: true) do |config|
-    config.vm.provider "virtualbox" do |_, override|
-      override.vm.box = "ubuntu/bionic64"
-    end
-    config.vm.provider "libvirt" do |_, override|
-      override.vm.box = "generic/ubuntu1804"
-    end
-  end
-
-  config.vm.define(:debian) do |config|
-    config.vm.provider "virtualbox" do |_, override|
-      override.vm.box = "generic/debian9"
-    end
-    config.vm.provider "libvirt" do |_, override|
-      override.vm.box = "debian/stretch64"
+  %i(ubuntu debian).each.with_index do |os, idx|
+    config.vm.define os do |config|
+      %i(virtualbox libvirt).each do |virt|
+        config.vm.provider virt do |_, override|
+          override.vm.box = IMAGES[os][virt]
+        end
+      end
     end
   end
-
 end
