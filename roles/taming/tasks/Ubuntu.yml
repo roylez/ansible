@@ -1,10 +1,14 @@
 ---
+- name: check if motd-news exits
+  stat: path=/etc/default/motd-news
+  register: motd_news
 
 - name: forbid motd-news to call home
   lineinfile:
     dest: /etc/default/motd-news
     line: "ENABLED=0"
     regexp: ^ENABLED=
+  when: motd_news.stat.exists
 
 - name: disable motd-news timer
   systemd:
