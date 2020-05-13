@@ -27,8 +27,8 @@ IMAGES = {
 
 Vagrant.configure("2") do |config|
   # do not create console log for vms
-  config.vm.provider "virtualbox" { |v| v.customize [ "modifyvm", :id, "--uartmode1", "disconnected" ] }
-  config.vm.provider "libvirt"    { |v| v.graphics_type = "none" }
+  config.vm.provider("virtualbox") { |v| v.customize [ "modifyvm", :id, "--uartmode1", "disconnected" ] }
+  config.vm.provider("libvirt"   ) { |v| v.graphics_type = "none" }
 
   config.nfs.functional       = false
   config.nfs.verify_installed = false

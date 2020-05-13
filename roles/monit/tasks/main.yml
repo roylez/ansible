@@ -17,11 +17,20 @@
     state: link
   notify: reload_monit
 
-- name: enable status output
-  blockinfile:
+- name: copy deamon defaults
+  copy: src=daemon-default dest=/etc/monit/conf.d/daemon-default
+  notify: reload_monit
+
+- name: make sure conf.d dir is loaded
+  lineinfile:
     dest: /etc/monit/monitrc
-    block: |
-      set httpd port 2812 and
-        use address localhost
-        allow localhost
+    regexp: '^#?\s*include\s/etc/monit/conf.d/\*$'
+    line: include /etc/monit/conf.d/*
+  notify: reload_monit
+
+- name: make sure conf-enabled is loaded
+  lineinfile:
+    dest: /etc/monit/monitrc
+    regexp: '^#?\s*include\s/etc/monit/conf-enabled/\*$'
+    line: include /etc/monit/conf-enabled/*
   notify: reload_monit
