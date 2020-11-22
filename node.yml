@@ -1,4 +1,5 @@
-- hosts: '{{ hosts }}'
+- hosts: all
+  connection: local
   remote_user: '{{ remote_user }}'
   roles:
     - vps
