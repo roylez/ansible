@@ -1,0 +1,4 @@
+localhost ansible_connection=local
+
+[proxmox]
+skull ansible_host=192.168.0.3 ansible_user=root

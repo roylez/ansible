@@ -1,0 +1,8 @@
+---
+
+version: 2.8
+
+maas_user: maas
+email:     maas@example.com
+password:  maas
+ssh_key:   "gh:roylez"

@@ -1,0 +1,12 @@
+---
+- name: ensure software-properties-common is installed
+  apt: name=software-properties-common
+
+- name: add maas ppa
+  apt_repository: repo="ppa:maas/{{ version }}"
+
+- name: install maas
+  apt: name=maas
+
+- name: maas createadmin
+  command: maas createadmin --username={{maas_user}} --email={{email}} --password={{password}} --ssh-import={{ssh_key}}

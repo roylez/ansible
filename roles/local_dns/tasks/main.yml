@@ -1,0 +1,11 @@
+---
+- name: install dnsmasq
+  apt: name=dnsmasq
+
+- name: setup dnsmasq
+  template: src=dnsmasq.conf.j2 dest=/etc/dnsmasq.conf
+  notify: reload_dnsmasq
+
+- name: enable dnsmasq
+  service: name=dnsmasq enabled=yes state=started
+

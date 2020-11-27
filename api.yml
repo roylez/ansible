@@ -1,5 +1,5 @@
-- hosts: all
-  connection: local
+- hosts:
+    - localhost
   remote_user: '{{ remote_user }}'
   roles:
     - vps
