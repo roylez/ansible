@@ -1,6 +1,6 @@
 {% set ip   = ansible_default_ipv4 %}
 
-dhcp-range={{ ip.network | ansible.netcommon.ipmath(101) }},{{ ip.network | ansible.netcommon.ipmath(250) }},12h
+dhcp-range={{ ip.network | ansible.netcommon.ipmath(50) }},{{ ip.network | ansible.netcommon.ipmath(250) }},12h
 dhcp-authoritative
 dhcp-option=option:router,{{ ip.gateway }}
 
@@ -9,6 +9,7 @@ interface={{ ip.interface }}
 expand-hosts
 domain-needed
 bogus-priv
+read-ethers
 domain=home,{{ ( ip.address + '/' + ip.netmask ) | ansible.netcommon.ipaddr('network/prefix') }},local
 
 {% for dns in dns_servers %}
