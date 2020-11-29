@@ -15,3 +15,5 @@ domain=home,{{ ( ip.address + '/' + ip.netmask ) | ansible.netcommon.ipaddr('net
 {% for dns in dns_servers %}
 server={{ dns }}
 {% endfor %}
+
+cache-size=1000
