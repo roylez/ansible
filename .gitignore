@@ -4,3 +4,4 @@
 *.log
 *.retry
 .autoenv*.zsh
+inventory/*.yml
