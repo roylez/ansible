@@ -1,0 +1,15 @@
+---
+
+- name: disable pve-enterprise repo
+  apt_repository:
+    repo: deb https://enterprise.proxmox.com/debian/pve buster pve-enterprise
+    state: absent
+- name: enable pve-no-subscription repo
+  apt_repository:
+    repo: deb http://download.proxmox.com/debian/pve buster pve-no-subscription
+
+- name: enable needed kernel modules
+  copy: src={{ item }} dest=/etc/modules-load.d/{{ item }}
+  with_items:
+    - passthrough.conf
+    - docker.conf

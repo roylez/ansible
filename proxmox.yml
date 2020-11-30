@@ -1,11 +1,5 @@
 - hosts: proxmox
-  pre_tasks:
-    - name: disable pve-enterprise repo
-      apt_repository:
-        repo: deb https://enterprise.proxmox.com/debian/pve buster pve-enterprise
-        state: absent
-    - name: enable pve-no-subscription repo
-      apt_repository:
-        repo: deb http://download.proxmox.com/debian/pve buster pve-no-subscription
   roles:
+    - pve
+    - taming
     - { role: local_dns, dns_servers: ["140.238.200.29", "1.1.1.1"] }
