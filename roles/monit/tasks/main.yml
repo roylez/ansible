@@ -7,7 +7,7 @@
     - curl
 
 - name: install notification script
-  copy: src=notify_calculon.sh dest=/usr/local/bin/notify_calculon.sh
+  template: src=notify_calculon.sh.j2 dest=/usr/local/bin/notify_calculon.sh mode=0755
 
 - name: enable service
   service: name=monit state=started enabled=yes

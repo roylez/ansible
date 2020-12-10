@@ -18,3 +18,5 @@ nomad_server_cert: "{{ vault_nomad_server_cert }}"
 nomad_server_key:  "{{ vault_nomad_server_key  }}"
 nomad_client_cert: "{{ vault_nomad_client_cert }}"
 nomad_client_key:  "{{ vault_nomad_client_key  }}"
+
+telegram_bot_webhook_url: "{{ vault_telegram_bot_webhook_url }}"
