@@ -1,20 +1,32 @@
 ---
 
-- name: install
-  apt: name=monit
+- name: install packages
+  apt: name={{item}}
+  with_items:
+    - monit
+    - curl
+
+- name: install notification script
+  copy: src=notify_calculon.sh dest=/usr/local/bin/notify_calculon.sh
 
 - name: enable service
   service: name=monit state=started enabled=yes
 
-- name: copy networking monit conf
-  template: src=networking.monit.j2 dest=/etc/monit/conf-available/networking
+- name: copy monit confs
+  template: src={{item}}.monit.j2 dest=/etc/monit/conf-available/{{item}}
+  with_items:
+    - networking
+    - disk
   notify: reload_monit
 
 - name: enable netowrking monitoring
   file:
-    src:   /etc/monit/conf-available/networking
-    dest:  /etc/monit/conf-enabled/networking
+    src:   /etc/monit/conf-available/{{item}}
+    dest:  /etc/monit/conf-enabled/{{item}}
     state: link
+  with_items:
+    - networking
+    - disk
   notify: reload_monit
 
 - name: copy deamon defaults
