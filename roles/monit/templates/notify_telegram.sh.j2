@@ -4,5 +4,5 @@
 HOOK_URL={{telegram_bot_webhook_url}}
 
 host=$(hostname -f)
-payload="{ \"text\": \"🐣 [*${host}*] $*\" }"
+payload="{ \"text\": \"🐣 [<b>${host}</b>] $*\" }"
 curl -H 'Content-Type:application/json' -d "$payload" $HOOK_URL 
