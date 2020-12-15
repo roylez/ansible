@@ -13,3 +13,17 @@
   with_items:
     - passthrough.conf
     - docker.conf
+
+- name: create backup dir if not exist
+  file: path={{ backup_dir }} state=directory
+
+- name: copy backup up script
+  copy: src=backup_pve_config.sh dest=/usr/local/bin mode=0755
+
+- name: create cron job to backup
+  cron:
+    name: backup pve
+    hour: "1"
+    minute: "5"
+    user: root
+    job: "/usr/local/bin/backup_pve_config.sh {{backup_dir}}"
