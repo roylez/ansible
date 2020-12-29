@@ -5,7 +5,7 @@
 
 - name: copy configuration
   get_url:
-    url: https://github.com/roylez/dotfiles/raw/master/.zshrc
+    url: https://github.com/roylez/dotfiles/raw/master/shell/.zshrc
     dest: "{{ ansible_env.HOME }}/.zshrc"
     force: yes
 

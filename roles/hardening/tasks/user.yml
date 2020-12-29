@@ -15,7 +15,7 @@
 
 - name: install zshrc
   get_url:
-    url: https://github.com/roylez/dotfiles/raw/master/.zshrc
+    url: https://github.com/roylez/dotfiles/raw/master/shell/.zshrc
     dest: "/home/{{ user }}/.zshrc"
     force: yes
 
