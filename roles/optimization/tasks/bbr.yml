@@ -8,7 +8,7 @@
     - ansible_kernel != kernel_version
 
 - name: change sysctl
-  sysctl: name={{ item.name }} value={{ item.value }} reload=no
+  sysctl: name={{ item.name }} value={{ item.value }} reload=yes
   with_items:
     - { name: net.core.default_qdisc,             value: fq_codel }
     - { name: net.ipv4.tcp_congestion_control,    value: bbr      }
