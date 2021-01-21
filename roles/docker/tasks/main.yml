@@ -47,6 +47,7 @@
   get_url:
     dest: /usr/local/bin/docker-compose
     url:  "https://github.com/docker/compose/releases/download/{{ docker_compose_version }}/docker-compose-{{ ansible_system }}-{{ ansible_architecture }}"
+    force: yes
     mode: 0755
   when: docker_compose_installed.rc !=0 or docker_compose_up_to_date.rc != 0
 
