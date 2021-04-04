@@ -1,0 +1,22 @@
+---
+
+- name: add tailscale apt key
+  apt_key:
+    url: https://pkgs.tailscale.com/stable/{{ ansible_distribution | lower }}/{{ ansible_distribution_release }}.gpg
+    state: present
+
+- name: add tailscale repo
+  apt_repository:
+    repo: deb https://pkgs.tailscale.com/stable/{{ ansible_distribution | lower }} {{ ansible_distribution_release }} main
+  register: tailscale_repo
+
+- name: install tailscale
+  apt:
+    name: tailscale
+    update_cache: yes
+
+- name: ensure tailscale service is enabled
+  service:
+    name: tailscaled
+    enabled: yes
+    state: started
