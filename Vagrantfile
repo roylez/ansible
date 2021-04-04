@@ -18,12 +18,16 @@ IMAGES = {
   ubuntu: {
     virtualbox: "ubuntu/bionic64",
     libvirt:    "generic/ubuntu1804",
+    docker:     "18.04"
   },
   debian: {
     virtualbox: "generic/debian9",
     libvirt:    "debian/stretch64",
+    docker:     "stable"
   }
 }
+
+ENV['VAGRANT_DEFAULT_PROVIDER'] = "libvirt"
 
 Vagrant.configure("2") do |config|
   # do not create console log for vms
@@ -43,6 +47,14 @@ Vagrant.configure("2") do |config|
         config.vm.provider virt do |_, override|
           override.vm.box = IMAGES[os][virt]
         end
+      end
+      # https://dev.to/mattdark/using-docker-as-provider-for-vagrant-10me
+      config.vm.provider :docker do |d|
+        d.build_dir       = "."
+        d.dockerfile      = "Dockerfile.#{os}"
+        d.build_args      = ["--build-arg", "VER=#{IMAGES[os][:docker]}"]
+        d.has_ssh         = true
+        d.remains_running = true
       end
     end
   end

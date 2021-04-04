@@ -4,7 +4,7 @@
   apt:  name="linux-image-{{ kernel_version }}"
   when:
     - ansible_distribution == "Ubuntu"
-    - ansible_distribution_major_version == "16"
+    - ansible_distribution_major_version < "18"
     - ansible_kernel != kernel_version
 
 - name: change sysctl
