@@ -11,9 +11,7 @@
   register: tailscale_repo
 
 - name: install tailscale
-  apt:
-    name: tailscale
-    update_cache: yes
+  apt: name=tailscale
 
 - name: ensure tailscale service is enabled
   service:
