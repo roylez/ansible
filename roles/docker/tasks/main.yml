@@ -17,7 +17,7 @@
   apt: update_cache=yes
 
 - name: install docker
-  apt: name=docker-ce state=present
+  apt: name=docker-ce state=latest
 
 # aufs no more supported for Linux 4.0.x
 - name: delete aufs
