@@ -11,7 +11,8 @@ TAME_SCRIPT = <<-SHELL
     sed -i 's/us.archive/au.archive/g' /etc/apt/sources.list
 
     echo "Install ansible"
-    apt-get -qq update; DEBIAN_FRONTEND=noninteractive apt-get -yq install ansible
+    apt-add-repository --yes --update ppa:ansible/ansible
+    DEBIAN_FRONTEND=noninteractive apt-get -yq install ansible make
 SHELL
 
 IMAGES = {

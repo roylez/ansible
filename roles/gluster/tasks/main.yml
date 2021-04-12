@@ -1,0 +1,10 @@
+---
+
+- name: add gluster ppa
+  apt_repository: repo=ppa:gluster/glusterfs-7
+
+- name: install gluster
+  apt: name=glusterfs-server
+
+- name: enable service
+  service: name=glusterd enabled=yes state=started
