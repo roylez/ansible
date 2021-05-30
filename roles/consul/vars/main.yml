@@ -5,3 +5,5 @@ url: "https://releases.hashicorp.com/consul/{{ version }}/{{ package }}"
 
 is_server: "{{ consul_server or ( ansible_local |json_query('role.consul.server') == 'true' ) }}"
 
+consul_datacenter: "{{ default_datacenter }}"
+

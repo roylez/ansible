@@ -1,4 +1,5 @@
-datacenter: cato
+default_datacenter: cato
+
 consul_server: false
 
 version: 1.8.4
