@@ -2,12 +2,12 @@
 
 - name: download nomad
   get_url:
-    url: "{{ nomad_url }}"
+    url: "{{ url }}"
     dest: /root
 
 - name: install
   unarchive:
-    src: /root/{{ nomad_package }}
+    src: "/root/{{ package }}"
     dest: /usr/local/bin
     remote_src: yes
 
