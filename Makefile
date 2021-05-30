@@ -1,7 +1,7 @@
 APPLY_LOCAL = ansible-playbook --become --ask-vault-pass --extra-vars='remote_user=root'
 
 role ?= vps 			# default role
-file ?= node.yml		# default playbook
+file ?= vps.yml			# default playbook
 
 .PHONY: *
 playbook: deb

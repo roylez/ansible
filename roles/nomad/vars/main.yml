@@ -1,9 +1,7 @@
 
-nomad_package: "nomad_{{ nomad_version }}_linux_amd64.zip"
+package: "nomad_{{ version }}_linux_amd64.zip"
 
-nomad_url: "https://releases.hashicorp.com/nomad/{{ nomad_version }}/{{ nomad_package }}"
+url: "https://releases.hashicorp.com/nomad/{{ version }}/{{ package }}"
 
-nomad:
-  server: false
-  client: true
-  advertise: "{{ ansible_default_ipv4.address }}"
+is_server: "{{ nomad_server or ( ansible_local.role.nomad.server | default('fasle') == 'true' ) }}"
+is_client: "{{ ansible_local.role.nomad.client | default('true') }}"

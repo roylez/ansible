@@ -1,5 +1,6 @@
-nomad_version: 0.9.5
+version: 1.0.4
+datacenter: cato
 
-nomad_server: 140.238.200.29
+server_address: void
 
-gossip_key: "lwEZtndpkEGXvB+0jrhxlA=="
+nomad_server: false

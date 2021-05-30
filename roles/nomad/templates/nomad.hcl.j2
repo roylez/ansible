@@ -1,0 +1,29 @@
+bind_addr = "0.0.0.0"
+datacenter = "{{ datacenter }}"
+data_dir = "/var/nomad"
+
+{% raw %}
+advertise {
+  rpc  = "{{ GetInterfaceIP \"tailscale0\" }}"
+  http = "{{ GetInterfaceIP \"tailscale0\" }}"
+  serf = "{{ GetInterfaceIP \"tailscale0\" }}"
+}
+{% endraw %}
+
+
+consul {
+  address = "127.0.0.1:8500"
+}
+
+{% if is_server %}
+server {
+  enabled          = true
+}
+{% endif %}
+
+{% if is_client %}
+client {
+  enabled    = true
+  servers    = ["{{ server_address }}"]
+}
+{% endif %}
