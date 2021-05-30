@@ -3,5 +3,5 @@ package: "nomad_{{ version }}_linux_amd64.zip"
 
 url: "https://releases.hashicorp.com/nomad/{{ version }}/{{ package }}"
 
-is_server: "{{ nomad_server or ( ansible_local |json_query('role.nomad.server') | default('fasle') == 'true' ) }}"
-is_client: "{{ ansible_local |json_query('role.nomad.client') | default('true') }}"
+is_server: "{{ nomad_server or ( ansible_local |json_query('role.nomad.server') == 'true' ) }}"
+is_client: "{{ ansible_local |json_query('role.nomad.client') != 'false' }}"

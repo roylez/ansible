@@ -17,13 +17,13 @@ consul {
 
 {% if is_server %}
 server {
-  enabled          = true
+  enabled = true
 }
 {% endif %}
 
 {% if is_client %}
 client {
-  enabled    = true
-  servers    = ["{{ server_address }}"]
+  enabled = true
+  servers = ["{{ server_address }}"]
 }
 {% endif %}
