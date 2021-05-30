@@ -1,10 +1,10 @@
 ---
 
 - name: install packages
-  apt: name={{item}}
-  with_items:
-    - monit
-    - curl
+  apt:
+    name:
+      - monit
+      - curl
 
 - name: install notification script
   template: src=notify_telegram.sh.j2 dest=/usr/local/bin/notify_telegram.sh mode=0755
