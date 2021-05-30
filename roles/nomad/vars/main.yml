@@ -5,3 +5,5 @@ url: "https://releases.hashicorp.com/nomad/{{ version }}/{{ package }}"
 
 is_server: "{{ nomad_server or ( ansible_local |json_query('role.nomad.server') == 'true' ) }}"
 is_client: "{{ ansible_local |json_query('role.nomad.client') != 'false' }}"
+
+client_meta: "{{ ansible_local |json_query('role.nomad_client_meta') if (ansible_local |json_query('role.nomad_client_meta') is mapping) else {} }}"
