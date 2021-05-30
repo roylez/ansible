@@ -1,0 +1,5 @@
+
+package: "consul_{{ version }}_linux_amd64.zip"
+
+url: "https://releases.hashicorp.com/consul/{{ version }}/{{ package }}"
+

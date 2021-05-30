@@ -1,0 +1,18 @@
+[Unit]
+Description=Consul
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+KillMode=process
+KillSignal=SIGINT
+ExecStart=/usr/local/bin/consul agent \
+  -config /etc/nomad/consul.hcl \
+  -bind '{{ GetInterfaceIP "tailscale0" }}'
+ExecReload=/bin/kill -HUP $MAINPID
+Restart=on-failure
+RestartSec=2
+TasksMax=infinity
+
+[Install]
+WantedBy=multi-user.target

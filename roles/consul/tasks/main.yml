@@ -1,0 +1,30 @@
+---
+
+- name: download consul
+  get_url:
+    url: "{{ url }}"
+    dest: /root
+
+- name: install
+  unarchive:
+    src: /root/{{ package }}
+    dest: /usr/local/bin
+    remote_src: yes
+
+- name: make sure /etc/nomad exists
+  file: path=/etc/nomad state=directory
+
+- name: install systemd unit
+  copy:
+    src: consul.service
+    dest: /etc/systemd/system/consul.service
+  notify: systemd_reload
+
+- name: install agent config
+  template:
+    src=consul.hcl.j2
+    dest=/etc/nomad/consul.hcl
+  notify: restart_consul
+
+- name: enable service
+  service: name=consul state=started enabled=yes

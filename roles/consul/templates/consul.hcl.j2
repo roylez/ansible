@@ -1,0 +1,9 @@
+datacenter = "{{ datacenter }}"
+data_dir = "/var/consul"
+log_level = "info"
+{% if consul_server %}
+server = true
+{% else %}
+server = false
+retry_join = "100.95.197.59"
+{% endif %}
