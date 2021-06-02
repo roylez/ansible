@@ -2,6 +2,7 @@ datacenter = "{{ consul_datacenter }}"
 data_dir = "/var/consul"
 log_level = "info"
 {% raw %}
+bind_addr = "{{ GetInterfaceIP \"tailscale0\" }}"
 client_addr = "127.0.0.1 {{ GetInterfaceIP \"docker0\" }}"
 {% endraw %}
 {% if is_server %}

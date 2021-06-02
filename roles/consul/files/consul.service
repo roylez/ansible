@@ -6,9 +6,7 @@ After=network-online.target
 [Service]
 KillMode=process
 KillSignal=SIGINT
-ExecStart=/usr/local/bin/consul agent \
-  -config-file /etc/nomad/consul.hcl \
-  -bind "{{ GetInterfaceIP \"tailscale0\" }}"
+ExecStart=/usr/local/bin/consul agent -config-file /etc/nomad/consul.hcl
 ExecReload=/bin/kill -HUP $MAINPID
 Restart=on-failure
 RestartSec=2
