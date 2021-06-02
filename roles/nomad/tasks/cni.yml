@@ -8,7 +8,7 @@
 - name: make sure /opt/cni/bin exists
   file: path=/opt/cni/bin state=directory
 
-- name: install
+- name: install cni
   unarchive:
     src: "/root/{{ cni_package }}"
     dest: /opt/cni/bin
