@@ -3,6 +3,6 @@ cni_version: 0.9.1
 
 default_datacenter: cato
 
-server_address: void
+server_address: 100.95.197.59
 
 nomad_server: false

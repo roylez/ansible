@@ -26,6 +26,10 @@ client {
   enabled = true
   servers = ["{{ server_address }}"]
 
+  host_network "default" {
+    interface = "{{ ansible_default_ipv4.interface }}"
+  }
+
   host_network "private" {
     interfaces = "tailscale0"
   }
