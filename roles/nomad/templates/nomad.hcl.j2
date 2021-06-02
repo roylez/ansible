@@ -26,6 +26,9 @@ client {
   enabled = true
   servers = ["{{ server_address }}"]
 
+  host_network "private" {
+    interfaces = "tailscale0"
+  }
 
   meta {
     {% for k, v in client_meta.items() %}

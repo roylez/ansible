@@ -1,5 +1,7 @@
 ---
 
+- include: cni.yml
+
 - name: download nomad
   get_url:
     url: "{{ url }}"

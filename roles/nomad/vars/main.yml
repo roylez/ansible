@@ -10,3 +10,5 @@ client_meta: "{{ ansible_local.role.nomad_client_meta if (ansible_local |json_qu
 
 nomad_datacenter: "{{ ansible_local.role.nomad.datacenter if (ansible_local |json_query('role.nomad.datacenter') != '') else default_datacenter }}"
 
+cni_package: "cni-plugins-linux-amd64-v{{cni_version}}.tgz"
+cni_url: "https://github.com/containernetworking/plugins/releases/download/v{{cni_version}}/{{cni_package}}"

@@ -1,0 +1,16 @@
+---
+
+- name: download cni
+  get_url:
+    url: "{{ cni_url }}"
+    dest: /root
+
+- name: make sure /opt/cni/bin exists
+  file: path=/opt/cni/bin state=directory
+
+- name: install
+  unarchive:
+    src: "/root/{{ cni_package }}"
+    dest: /opt/cni/bin
+    remote_src: yes
+
