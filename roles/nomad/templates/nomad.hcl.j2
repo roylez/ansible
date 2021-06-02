@@ -27,11 +27,11 @@ client {
   servers = ["{{ server_address }}"]
 
   host_network "default" {
-    interface = "{{ ansible_default_ipv4.interface }}"
+    interface = "tailscale0"
   }
 
-  host_network "private" {
-    interface = "tailscale0"
+  host_network "public" {
+    interface = "{{ ansible_default_ipv4.interface }}"
   }
 
   meta {
