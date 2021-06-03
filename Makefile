@@ -4,7 +4,7 @@ role ?= vps 			# default role
 file ?= vps.yml			# default playbook
 
 .PHONY: *
-playbook: deb
+playbook:
 	$(APPLY_LOCAL) $(file)
 
 proxmox:
