@@ -1,20 +1,24 @@
 ---
 
 - include: apt.yml
-  when: ansible_distribution == "Ubuntu"
+  when: ansible_os_family == "Debian"
 
 - include: yum.yml
-  when: ansible_distribution == "RedHat"
+  when: ansible_os_family == "RedHat"
 
 - name: install docker
-  packge: name=docker-ce state=latest
+  package: name=docker-ce state=latest
 
 - name: install docker_py
   package: name=python-docker
+  when: ansible_os_family == "Debian"
 
 # aufs no more supported for Linux 4.0.x
 - name: delete aufs
   file: path=/var/lib/docker/aufs state=absent
+
+- name: ensure /etc/docker exists
+  file: path=/etc/docker state=directory
 
 - name: config docker daemon
   copy:
