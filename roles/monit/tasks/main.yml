@@ -1,7 +1,7 @@
 ---
 
 - name: install packages
-  apt:
+  package:
     name:
       - monit
       - curl
