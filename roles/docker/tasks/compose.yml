@@ -1,0 +1,28 @@
+---
+- name: check if docker-compose is installed
+  shell: command -v docker-compose >/dev/null 2>&1
+  register: docker_compose_installed
+  ignore_errors: yes
+
+- name: check if docker_compose version is {{ docker_compose_version }}
+  shell: command docker-compose --version |grep {{ docker_compose_version }}
+  register: docker_compose_up_to_date
+  ignore_errors: yes
+  when: docker_compose_installed.rc == 0
+
+- name: install docker-compose
+  get_url:
+    dest: /usr/local/bin/docker-compose
+    url:  "https://github.com/docker/compose/releases/download/{{ docker_compose_version }}/docker-compose-{{ ansible_system }}-{{ ansible_architecture }}"
+    force: yes
+    mode: 0755
+  when: docker_compose_installed.rc !=0 or docker_compose_up_to_date.rc != 0
+
+- name: ensure zfunctions exists
+  file: path={{ ansible_env.HOME }}/.zfunctions state=directory
+
+- name: install docker-compose completions
+  get_url:
+    dest: "{{ ansible_env.HOME }}/.zfunctions/_docker_compose"
+    url:  https://github.com/docker/compose/raw/master/contrib/completion/zsh/_docker-compose
+
