@@ -13,3 +13,10 @@ sshd_options:
   PubkeyAuthentication:   "yes"
   PermitRootLogin:        "no"
   AllowUsers:             "{{ user }}"
+
+packages:
+  - fail2ban
+
+remove_packages:
+  - snapd
+  - postfix

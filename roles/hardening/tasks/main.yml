@@ -2,11 +2,12 @@
 # http://www.codelitt.com/blog/my-first-10-minutes-on-a-server-primer-for-securing-ubuntu/
 
 - name: install stuff
-  apt: name={{ packages }}
+  package: name={{ packages }} state=present
 
 - name: enable apt unattended security update
   copy: src={{ item }} dest=/etc/apt/apt.conf.d/
   with_items: [ 10periodic, 50unattended-upgrades ]
+  when: ansible_distribution == "Ubuntu"
 
 - name: update sshd_config
   lineinfile:

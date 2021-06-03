@@ -7,7 +7,6 @@ vps_packages:
   - htop
   - unzip
   - iftop
-  - silversearcher-ag
 
 update_dns: yes
 

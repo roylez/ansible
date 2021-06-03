@@ -1,17 +1,24 @@
 ---
 
-- name: add tailscale apt key
+- name: add apt key
   apt_key:
     url: https://pkgs.tailscale.com/stable/{{ ansible_distribution | lower }}/{{ ansible_distribution_release }}.gpg
     state: present
+  when: ansible_os_family == "Debian"
 
-- name: add tailscale repo
+- name: add repo for Ubuntu
   apt_repository:
     repo: deb https://pkgs.tailscale.com/stable/{{ ansible_distribution | lower }} {{ ansible_distribution_release }} main
   register: tailscale_repo
+  when: ansible_os_family == "Debian"
+
+- name: add repo for Centos
+  shell: yum-config-manager --add-repo=https://pkgs.tailscale.com/stable/centos/8/tailscale.repo
+  args:
+    creates: /etc/yum.repos.d/tailscale.repo
 
 - name: install tailscale
-  apt: name=tailscale
+  package: name=tailscale state=present
 
 - name: ensure tailscale service is enabled
   service:

@@ -1,6 +1,6 @@
 ---
 - name: install zsh
-  apt: name=zsh
+  package: name=zsh state=present
   become: yes
 
 - name: copy configuration

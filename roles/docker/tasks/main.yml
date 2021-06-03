@@ -1,23 +1,16 @@
 ---
 
-- name: install apt-transport-https
-  apt: name=apt-transport-https
+- include: apt.yml
+  when: ansible_distribution == "Ubuntu"
 
-- name: add docker apt-key
-  apt_key: url=https://download.docker.com/linux/ubuntu/gpg state=present
-
-- name: add docker repo
-  apt_repository:
-    repo: "deb [arch=amd64] https://download.docker.com/linux/{{ ansible_distribution | lower }} {{ ansible_distribution_release }} stable"
-    state: present
-  register: docker_repo_added
-
-- name: refresh apt cache
-  when: docker_repo_added.changed
-  apt: update_cache=yes
+- include: yum.yml
+  when: ansible_distribution == "RedHat"
 
 - name: install docker
-  apt: name=docker-ce state=latest
+  packge: name=docker-ce state=latest
+
+- name: install docker_py
+  package: name=python-docker
 
 # aufs no more supported for Linux 4.0.x
 - name: delete aufs
@@ -67,6 +60,3 @@
     name: "docker cleanup"
     minute: 13
     job: /usr/local/bin/docker-clean
-
-- name: install docker_py
-  apt: name=python-docker

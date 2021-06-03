@@ -1,0 +1,16 @@
+- name: install apt-transport-https
+  apt: name=apt-transport-https
+
+- name: add docker apt-key
+  apt_key: url=https://download.docker.com/linux/ubuntu/gpg state=present
+
+- name: add docker repo
+  apt_repository:
+    repo: "deb [arch=amd64] https://download.docker.com/linux/{{ ansible_distribution | lower }} {{ ansible_distribution_release }} stable"
+    state: present
+  register: docker_repo_added
+
+- name: refresh apt cache
+  when: docker_repo_added.changed
+  apt: update_cache=yes
+
