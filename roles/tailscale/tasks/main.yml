@@ -16,6 +16,7 @@
   shell: yum-config-manager --add-repo=https://pkgs.tailscale.com/stable/centos/8/tailscale.repo
   args:
     creates: /etc/yum.repos.d/tailscale.repo
+  when: ansible_os_family == "RedHat"
 
 - name: install tailscale
   package: name=tailscale state=present
