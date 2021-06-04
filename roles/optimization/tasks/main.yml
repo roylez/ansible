@@ -9,6 +9,9 @@
   sysctl: name={{ item.key }} value={{ item.value }} reload=yes
   with_dict: "{{ sysctl_tweaks }}"
 
+- name: ensure gai.conf exists
+  file: path=/etc/gai.conf
+
 - name: make ipv4 preferred by getaddrinfo
   lineinfile:
     name: /etc/gai.conf
