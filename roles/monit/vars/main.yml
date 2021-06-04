@@ -1,4 +1,4 @@
 ---
 
-monitrc: "{{ "/etc/monit/monitrc" if ansible_os_family == 'Debian' else "/etc/monitrc" }}"
-monit_dir: "{{ "/etc/monit/monitrc.d" if ansible_os_family == 'Debian' else "/etc/monit.d" }}"
+monitrc: "{{ '/etc/monit/monitrc' if ansible_os_family == 'Debian' else '/etc/monitrc' }}"
+monit_dir: "{{ '/etc/monit/monitrc.d' if ansible_os_family == 'Debian' else '/etc/monit.d' }}"
