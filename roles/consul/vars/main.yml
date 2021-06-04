@@ -1,5 +1,7 @@
 
-package: "consul_{{ version }}_linux_amd64.zip"
+consul_architecture: "{{ 'amd64' if ansible_architecture == 'x86_64' else 'arm64' }}"
+
+package: "consul_{{ version }}_linux_{{ consul_architecture }}.zip"
 
 url: "https://releases.hashicorp.com/consul/{{ version }}/{{ package }}"
 
