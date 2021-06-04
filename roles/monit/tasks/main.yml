@@ -13,7 +13,7 @@
   service: name=monit state=started enabled=yes
 
 - name: copy monit confs
-  template: src={{item}}.monit.j2 dest={{ monit_dir }}/{{item}}
+  template: src={{item}}.j2 dest={{ monit_dir }}/{{item}}
   with_items:
     - daemon-default
     - networking
