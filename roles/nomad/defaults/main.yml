@@ -1,7 +1,7 @@
 version: 1.1.0
 
 cni_version: 0.9.1
-enable_cni: false
+enable_cni: true
 
 default_datacenter: cato
 
