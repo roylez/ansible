@@ -25,6 +25,9 @@ server {
 client {
   enabled = true
   servers = ["{{ server_address }}"]
+  {% if nomad_cpu_total_compute is defined %}
+  cpu_total_compute = {{ nomad_cpu_total_compute }}
+  {% endif %}
 
   host_network "default" {
     interface = "tailscale0"

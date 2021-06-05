@@ -1,6 +1,7 @@
 ---
 
 - include: cni.yml
+  when: enable_cni
 
 - name: download nomad
   get_url:
@@ -55,6 +56,16 @@
 #     content: "{{ nomad_client_key }}"
 #     dest: /etc/nomad/client-key.pem
 #   notify: restart_nomad
+
+- name: Calculate nomad_cpu_total_compute for amd64
+  shell:decode -t 4 |awk '/Current Speed/ {s=$3} /Core Enabled/ {c=$3} END {print s*c}' 
+  register: cpu_total_compute
+  when: nomad_architecture == 'arm64'
+
+- name: Set nomad_cpu_total_compute from calculated value
+  set_fact:
+    nomad_cpu_total_compute: "{{ cpu_total_compute.stdout }}"
+  when: cpu_total_compute is defined
 
 - name: install agent config
   template:
