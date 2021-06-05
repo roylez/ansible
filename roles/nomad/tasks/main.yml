@@ -58,7 +58,7 @@
 #   notify: restart_nomad
 
 - name: Calculate nomad_cpu_total_compute for amd64
-  shell: decode -t 4 |awk '/Current Speed/ {s=$3} /Core Enabled/ {c=$3} END {print s*c}' 
+  shell: dmidecode -t 4 |awk '/Current Speed/ {s=$3} /Core Enabled/ {c=$3} END {print s*c}' 
   register: cpu_total_compute
   when: nomad_architecture == 'arm64'
 
