@@ -43,4 +43,12 @@ client {
     {% endfor %}
   }
 }
+
+plugin "docker" {
+  config {
+    volumes {
+      enabled = true
+    }
+  }
+}
 {% endif %}
