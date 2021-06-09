@@ -62,10 +62,12 @@
   register: cpu_total_compute
   when: nomad_architecture == 'arm64'
 
-- name: Set nomad_cpu_total_compute from calculated value
+- name: set nomad_cpu_total_compute from calculated value
   set_fact:
     nomad_cpu_total_compute: "{{ cpu_total_compute.stdout }}"
-  when: cpu_total_compute is defined
+  when:
+    - nomad_architecture == 'arm64'
+    - cpu_total_compute is defined
 
 - name: install agent config
   template:
