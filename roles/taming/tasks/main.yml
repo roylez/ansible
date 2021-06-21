@@ -2,8 +2,11 @@
 
 - include: timezone.yml
 
-- include: Ubuntu.yml
+- include: ubuntu.yml
   when: ansible_distribution == "Ubuntu"
+
+- include: redhat.yml
+  when: ansible_os_family == "RedHat"
 
 - include: bash.yml
 
