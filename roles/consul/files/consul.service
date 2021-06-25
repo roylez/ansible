@@ -2,6 +2,10 @@
 Description=Consul
 Wants=network-online.target
 After=network-online.target
+Wants=tailscaled.service
+After=tailscaled.service
+Wants=docker.service
+After=docker.service
 
 [Service]
 KillMode=process
