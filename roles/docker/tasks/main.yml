@@ -9,9 +9,9 @@
 - name: install docker
   package: name=docker-ce state=latest
 
-- name: install docker_py
-  package: name=python-docker
-  when: ansible_os_family == "Debian"
+# - name: install docker_py
+#   package: name=python-docker
+#   when: ansible_os_family == "Debian"
 
 # aufs no more supported for Linux 4.0.x
 - name: delete aufs
