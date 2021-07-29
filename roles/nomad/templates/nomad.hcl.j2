@@ -18,6 +18,9 @@ consul {
 {% if is_server %}
 server {
   enabled = true
+  server_join = {
+    retry_join = ["{{ server_address }}"]
+  }
 }
 {% endif %}
 
