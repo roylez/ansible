@@ -1,8 +1,8 @@
 [Unit]
 Description=Consul
-Wants=network-online.target
+Requires=network-online.target
 After=network-online.target
-Wants=tailscaled.service
+Requires=tailscaled.service
 After=tailscaled.service
 Wants=docker.service
 After=docker.service
