@@ -17,13 +17,13 @@ SHELL
 
 IMAGES = {
   ubuntu: {
-    virtualbox: "ubuntu/bionic64",
-    libvirt:    "generic/ubuntu1804",
-    docker:     "18.04"
+    virtualbox: "generic/ubuntu2004",
+    libvirt:    "generic/ubuntu2004",
+    docker:     "20.04"
   },
   debian: {
-    virtualbox: "generic/debian9",
-    libvirt:    "debian/stretch64",
+    virtualbox: "generic/debian10",
+    libvirt:    "generic/debian10",
     docker:     "stable"
   }
 }
@@ -51,7 +51,7 @@ Vagrant.configure("2") do |config|
       end
       # https://dev.to/mattdark/using-docker-as-provider-for-vagrant-10me
       config.vm.provider :docker do |d|
-        d.build_dir       = "."
+        d.build_dir       = "docker"
         d.dockerfile      = "Dockerfile.#{os}"
         d.build_args      = ["--build-arg", "VER=#{IMAGES[os][:docker]}"]
         d.has_ssh         = true
