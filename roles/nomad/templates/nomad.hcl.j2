@@ -17,12 +17,23 @@ consul {
 
 {% if is_server %}
 server {
-  enabled = true
-  server_join = {
-    retry_join = ["{{ server_address }}"]
-  }
+  enabled          = true
+  raft_protocol    = 3
+  # use consul for auto clustering
+  bootstrap_expect = 3
+}
+
+autopilot {
+  cleanup_dead_servers      = true
+  last_contact_threshold    = "200ms"
+  max_trailing_logs         = 250
+  server_stabilization_time = "10s"
+  enable_redundancy_zones   = false
+  disable_upgrade_migration = false
+  enable_custom_upgrades    = false
 }
 {% endif %}
+
 
 {% if is_client %}
 client {
