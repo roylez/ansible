@@ -15,3 +15,15 @@
     name: motd-news.timer
     state: stopped
     enabled: no
+
+- name: disable unattended-upgrades download
+  lineinfile:
+    dest: /etc/apt/apt.conf.d/10periodic
+    line: 'APT::Periodic::Download-Upgradeable-Packages "0";'
+    regexp: ^APT::Periodic::Download-Upgradeable-Packages
+
+- name: disable unattended-upgrades
+  lineinfile:
+    dest: /etc/apt/apt.conf.d/10periodic
+    line: 'APT::Periodic::Unattended-Upgrade "0";'
+    regexp: ^APT::Periodic::Unattended-Upgrade
