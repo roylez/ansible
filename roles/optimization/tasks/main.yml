@@ -5,6 +5,15 @@
 - name: install packages
   package: name={{ vps_packages }} state=present
 
+- name: add et ppa
+  apt_repository: repo="ppa:jgmath2000/et"
+
+- name: install eternal terminal
+  package: name=et state=present
+
+- name: enable et service
+  service: name=et state=started enabled=yes
+
 - name: sysctl tweaks
   sysctl: name={{ item.key }} value={{ item.value }} reload=yes
   with_dict: "{{ sysctl_tweaks }}"
