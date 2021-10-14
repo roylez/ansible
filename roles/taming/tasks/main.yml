@@ -8,6 +8,8 @@
 - include: redhat.yml
   when: ansible_os_family == "RedHat"
 
+- include: et.yml
+
 - include: bash.yml
 
 - include: vim.yml

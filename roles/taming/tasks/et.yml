@@ -1,0 +1,10 @@
+---
+- name: add et ppa
+  apt_repository: repo="ppa:jgmath2000/et"
+  when: ansible_os_family == "Debian"
+
+- name: install eternal terminal
+  package: name=et state=present
+
+- name: enable et service
+  service: name=et state=started enabled=yes
