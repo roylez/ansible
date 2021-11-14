@@ -9,6 +9,7 @@
   when: ansible_os_family == "RedHat"
 
 - include: et.yml
+  when: ansible_distribution == "Ubuntu"
 
 - include: bash.yml
 
