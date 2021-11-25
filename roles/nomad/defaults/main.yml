@@ -5,6 +5,6 @@ enable_cni: true
 
 default_datacenter: cato
 
-server_address: 100.95.197.59
+server_address: 100.124.198.27
 
 nomad_server: false
