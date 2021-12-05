@@ -7,6 +7,7 @@
 
 - name: install ubuntu specific packages
   package: name={{ ubuntu_packages }} state=present
+  when: ansible_os_family == 'Debian'
 
 - name: sysctl tweaks
   sysctl: name={{ item.key }} value={{ item.value }} reload=yes
