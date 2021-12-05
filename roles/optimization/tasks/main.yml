@@ -5,6 +5,9 @@
 - name: install packages
   package: name={{ vps_packages }} state=present
 
+- name: install ubuntu specific packages
+  package: name={{ ubuntu_packages }} state=present
+
 - name: sysctl tweaks
   sysctl: name={{ item.key }} value={{ item.value }} reload=yes
   with_dict: "{{ sysctl_tweaks }}"

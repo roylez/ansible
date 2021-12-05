@@ -7,6 +7,8 @@ vps_packages:
   - htop
   - unzip
   - iftop
+
+ubuntu_packages:
   - software-properties-common
 
 update_dns: yes
