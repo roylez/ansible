@@ -4,4 +4,4 @@
   roles:
     - vps
     - tailscale
-    - nomad
+    - swarm

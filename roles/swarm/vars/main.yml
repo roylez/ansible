@@ -1,0 +1,1 @@
+advertise_addr: {{ ansible_tailscale0.ipv4.address }}
