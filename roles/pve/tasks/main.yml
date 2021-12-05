@@ -21,6 +21,9 @@
 - name: copy backup up script
   copy: src=backup_pve_config.sh dest=/usr/local/bin mode=0755
 
+- name: copy cloud image templating script
+  copy: src=make_cloud_template.sh dest={{ ansible_env.HOME }} mode=0755
+
 - name: create cron job to backup
   cron:
     name: backup pve
