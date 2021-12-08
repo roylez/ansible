@@ -24,7 +24,7 @@
 
 - name: convoy mkdirs for docker plugins
   file: path={{ item }} state=directory
-  items:
+  with_items:
     - /etc/docker/plugins
     - "{{ convoy_vfs_path }}"
 
