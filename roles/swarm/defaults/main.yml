@@ -3,6 +3,6 @@ manager: 100.90.231.55:2377
 
 convoy: false
 convoy_version: 0.5.2
-convoy_nfs_server: 100.90.231.55:/nfs
-convoy_vfs_path: /convoy
+convoy_nfs: 100.90.231.55:/nfs
+convoy_path: /convoy
 
