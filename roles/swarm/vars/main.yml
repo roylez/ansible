@@ -6,4 +6,4 @@ convoy_url: "https://github.com/rancher/convoy/releases/download/v{{ convoy_vers
 
 convoy_vfs_path: "{{ convoy_path or ( ansible_local |json_query('role.swarm.convoy_path')) }}"
 
-convoy_nfs_server: "{{ convoy_nfs or ( ansible_local |json_query('role.swarm.convoy_nfs }}"
+convoy_nfs_server: "{{ convoy_nfs or ( ansible_local |json_query('role.swarm.convoy_nfs')) }}"
