@@ -1,6 +1,0 @@
----
-
-- name: reload_convoy
-  service:
-    name: convoy
-    state: restarted

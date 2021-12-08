@@ -1,9 +1,1 @@
 advertise_addr: "{{ ansible_tailscale0.ipv4.address }}"
-
-install_convoy: "{{ convoy or ( ansible_local |json_query('role.swarm.convoy') == 'true' ) }}"
-
-convoy_url: "https://github.com/rancher/convoy/releases/download/v{{ convoy_version }}/convoy.tar.gz"
-
-convoy_vfs_path: "{{ convoy_path or ( ansible_local |json_query('role.swarm.convoy_path')) }}"
-
-convoy_nfs_server: "{{ convoy_nfs or ( ansible_local |json_query('role.swarm.convoy_nfs')) }}"
