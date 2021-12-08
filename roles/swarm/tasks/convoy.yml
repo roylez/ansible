@@ -1,0 +1,50 @@
+- name: convoy download
+  get_url:
+    url: "{{ convoy_url }}"
+    dest: "/root/"
+
+- name: make dir for unpacking
+  file: path=/root/tmp state=directory
+
+- name: convoy unpack
+  unarchive:
+    src: /root/convoy.tar.gz
+    dest: /root/tmp
+    remote_src: yes
+
+- name: convoy install
+  copy:
+    remote_src: yes
+    src: /root/tmp/convoy/{{ item }}
+    dest: /usr/local/bin
+    mode: 0755
+  with_items:
+    - convoy
+    - convoy-pdata_tools
+
+- name: convoy mkdirs for docker plugins
+  file: path={{ item }} state=directory
+  items:
+    - /etc/docker/plugins
+    - "{{ convoy_vfs_path }}"
+
+- name: copy convoy plugin spec
+  copy: src=convoy.spec dest=/etc/docker/plugins
+
+- name: add nfs mount
+  mount:
+    src: "{{ convoy_nfs_server }}"
+    path: "{{ convoy_vfs_path }}"
+    opts: nofail,noatime,nolock,intr,tcp,actimeo=1800
+    boot: yes
+    state: mounted
+    fstype: nfs4
+
+- name: create convoy service
+  template:
+    src: convoy.service.j2
+    dest: /etc/systemd/system/convoy.service
+  notify: reload_convoy
+
+- name: start convoy
+  service: name=convoy state=started enabled=yes
