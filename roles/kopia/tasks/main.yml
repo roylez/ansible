@@ -20,7 +20,7 @@
 - name: install completion
   shell: kopia --completion-script-zsh > _kopia
   args:
-    chdir: {{ ansible_env.HOME }}/.zfunctions
+    chdir: "{{ ansible_env.HOME }}/.zfunctions"
     creates: _kopia
 
 - name: set global compression policy
