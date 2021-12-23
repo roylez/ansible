@@ -5,3 +5,4 @@ dependencies:
   - role: optimization
   - role: hardening
   - role: taming
+  - role: kopia

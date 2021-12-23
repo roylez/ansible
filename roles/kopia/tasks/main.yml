@@ -1,0 +1,28 @@
+---
+
+- name: download consul
+  get_url:
+    url: "{{ release_url }}"
+    dest: /root
+
+- name: install
+  unarchive:
+    src: /root/{{ package_name }}.tar.gz
+    dest: /usr/local/bin
+    remote_src: yes
+    include: kopia
+    creates: /usr/local/bin/kopia
+  register: kopia_installed
+
+- name: ensure zfunctions exists
+  file: path={{ ansible_env.HOME }}/.zfunctions state=directory
+
+- name: install completion
+  shell: kopia --completion-script-zsh > _kopia
+  args:
+    chdir: {{ ansible_env.HOME }}/.zfunctions
+    creates: _kopia
+
+- name: set global compression policy
+  when: kopia_installed.changed
+  command: kopia policy set --global --compression zstd
