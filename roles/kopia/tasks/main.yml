@@ -10,8 +10,9 @@
     src: /root/{{ package_name }}.tar.gz
     dest: /usr/local/bin
     remote_src: yes
-    include:
-      - kopia
+    exclude:
+      - README.md
+      - LICENSE
     creates: /usr/local/bin/kopia
   register: kopia_installed
 
@@ -19,11 +20,11 @@
   file: path={{ ansible_env.HOME }}/.zfunctions state=directory
 
 - name: install completion
-  shell: kopia --completion-script-zsh > _kopia
+  shell: /usr/local/bin/kopia --completion-script-zsh > _kopia
   args:
     chdir: "{{ ansible_env.HOME }}/.zfunctions"
     creates: _kopia
 
 - name: set global compression policy
   when: kopia_installed.changed
-  command: kopia policy set --global --compression zstd
+  command: /usr/local/bin/kopia policy set --global --compression zstd
