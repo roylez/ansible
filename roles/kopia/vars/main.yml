@@ -1,4 +1,4 @@
-architecture: "{% if ansible_architecture == "aarch64" %}arm64{% else %}x86{% endif %}"
+architecture: "{% if ansible_architecture == 'aarch64' %}arm64{% else %}x86{% endif %}"
 
 package_name: "kopia-{{ version }}-linux-{{ architecture }}"
 release_url: "https://github.com/kopia/kopia/releases/download/v{{ version }}/{{ package_name }}.tar.gz"
