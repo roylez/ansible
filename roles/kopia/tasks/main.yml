@@ -1,6 +1,6 @@
 ---
 
-- name: download consul
+- name: download
   get_url:
     url: "{{ release_url }}"
     dest: /root
@@ -10,7 +10,8 @@
     src: /root/{{ package_name }}.tar.gz
     dest: /usr/local/bin
     remote_src: yes
-    include: kopia
+    include:
+      - kopia
     creates: /usr/local/bin/kopia
   register: kopia_installed
 
