@@ -14,7 +14,6 @@
       - README.md
       - LICENSE
     creates: /root/tmp/{{ package_name }}/kopia
-  register: kopia_installed
 
 - name: install
   copy:
@@ -28,7 +27,3 @@
   args:
     chdir: "{{ ansible_env.HOME }}/.zfunctions"
     creates: _kopia
-
-- name: set global compression policy
-  when: kopia_installed.changed
-  command: /usr/local/bin/kopia policy set --global --compression zstd
