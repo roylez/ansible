@@ -8,12 +8,13 @@
 - name: unpack
   unarchive:
     src: /root/{{ package_name }}.tar.gz
-    dest: /root/tmp/{{ package_name }}
+    dest: /root/tmp
     remote_src: yes
     exclude:
       - README.md
       - LICENSE
     creates: /root/tmp/{{ package_name }}/kopia
+    register: kopia_installed
 
 - name: install
   copy:
