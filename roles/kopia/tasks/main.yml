@@ -14,7 +14,7 @@
       - README.md
       - LICENSE
     creates: /root/tmp/{{ package_name }}/kopia
-    register: kopia_installed
+  register: kopia_installed
 
 - name: install
   copy:
