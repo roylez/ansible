@@ -5,16 +5,22 @@
     url: "{{ release_url }}"
     dest: /root
 
-- name: install
+- name: unpack
   unarchive:
     src: /root/{{ package_name }}.tar.gz
-    dest: /usr/local/bin
+    dest: /root/tmp/{{ package_name }}
     remote_src: yes
     exclude:
       - README.md
       - LICENSE
-    creates: /usr/local/bin/kopia
-  register: kopia_installed
+    dest: /root/tmp/{{ package_name }}/kopia
+
+- name: install
+  copy:
+    remote_src: yes
+    src: /root/tmp/{{ package_name }}/kopia
+    dest: /usr/local/bin
+    mode: 0755
 
 - name: install completion
   shell: /usr/local/bin/kopia --completion-script-zsh > _kopia
