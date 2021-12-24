@@ -21,6 +21,12 @@
 - name: copy git config
   copy: src=gitconfig dest=~/.gitconfig
 
+- name: make dirs
+  file: path=/root/{{ item }} state=directory
+  with_items:
+    - .zfunctions
+    - tmp
+
 - name: reload local facts
   setup:
     filter: ansible_local

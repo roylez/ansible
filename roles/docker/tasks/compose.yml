@@ -18,9 +18,6 @@
     mode: 0755
   when: docker_compose_installed.rc !=0 or docker_compose_up_to_date.rc != 0
 
-- name: ensure zfunctions exists
-  file: path={{ ansible_env.HOME }}/.zfunctions state=directory
-
 - name: install docker-compose completions
   get_url:
     dest: "{{ ansible_env.HOME }}/.zfunctions/_docker_compose"
