@@ -13,7 +13,7 @@
     exclude:
       - README.md
       - LICENSE
-    dest: /root/tmp/{{ package_name }}/kopia
+    creates: /root/tmp/{{ package_name }}/kopia
 
 - name: install
   copy:
