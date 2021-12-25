@@ -1,3 +1,8 @@
+- name: check if is already in swarm mode
+  shell: docker info |grep 'Swarm: active'
+  register: swarm_active
+
 - name: join swarm
   command: docker swarm join --token {{ token }} --advertise-addr {{ advertise_addr }} {{ manager }}
   ignore_errors: yes
+  when: swarm_active.rc != 0
