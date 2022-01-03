@@ -1,2 +1,2 @@
-backup_dir: /backup
+backup_dir: /backup/pve
 release: bullseye
