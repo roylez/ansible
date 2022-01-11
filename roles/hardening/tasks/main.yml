@@ -21,6 +21,10 @@
   apt: name={{ remove_packages }} state=absent
   when: ansible_distribution == "Ubuntu"
 
+- name: enforce fail2ban for sshd
+  copy: src=fail2ban_sshd.conf dest=/etc/fail2ban/jail.d/
+  notify: restart_fail2ban
+
 - include: user.yml
 
 - include: firewall.yml
