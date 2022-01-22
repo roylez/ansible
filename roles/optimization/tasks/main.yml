@@ -14,7 +14,11 @@
   with_dict: "{{ sysctl_tweaks }}"
 
 - name: ensure gai.conf exists
-  file: path=/etc/gai.conf state=touch
+  file:
+    path: /etc/gai.conf
+    state: touch
+    modification_time: preserve
+    access_time: preserve
 
 - name: make ipv4 preferred by getaddrinfo
   lineinfile:
