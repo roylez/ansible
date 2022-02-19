@@ -13,6 +13,6 @@
   user: name={{ ansible_user_id }} shell=/usr/bin/zsh
   when: ansible_user_id != "root"
 
-- name: change default shell to zsh
-  user: name=root shell=/usr/bin/bash
+- name: change default shell to bash for root
+  user: name=root shell=/bin/bash
   become: yes
