@@ -1,5 +1,6 @@
 - name: check if is already in swarm mode
-  shell: docker info |grep -E 'Swarm. active'
+  shell: "docker info -f '{{ '{{' }}.Swarm.LocalNodeState{{ '}}' }}'|grep -E '^active'"
+  ignore_errors: yes
   register: swarm_active
 
 - name: join swarm
