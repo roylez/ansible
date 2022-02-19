@@ -1,5 +1,5 @@
 - name: check if is already in swarm mode
-  shell: docker info |grep -E 'Swarm. active'
+  shell: docker info |grep -E 'Swarm: active'
   register: swarm_active
 
 - name: join swarm

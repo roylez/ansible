@@ -6,7 +6,7 @@
 [ -z "$PS1" ] && return
 
 # don't put duplicate lines in the history. See bash(1) for more options
-#export HISTCONTROL=ignoredups
+export HISTCONTROL=ignoredups
 
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
@@ -37,12 +37,17 @@ PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[0
 if [[ -z $SSH_CONNECTION ]]; then
     case "$TERM" in
         xterm*|rxvt*)
-        PROMPT_COMMAND='echo -ne "\033]0;${USER}@${HOSTNAME}: ${PWD}\007"'
-        ;;
+            PROMPT_COMMAND='echo -ne "\033]0;${USER}@${HOSTNAME}: ${PWD}\007"'
+            ;;
         screen)
-        PROMPT_COMMAND='echo -ne "\033]0;${USER}@${HOSTNAME}: ${PWD}\007"'
-        ;;
+            PROMPT_COMMAND='echo -ne "\033]0;${USER}@${HOSTNAME}: ${PWD}\007"'
+            ;;
+        *)
+            export TERM=xterm
+            ;;
     esac
+else
+    export TERM=xterm
 fi
 
 # Alias definitions.
@@ -60,17 +65,13 @@ if [ -f /etc/bash_completion ]; then
 fi
 
 # enable color support of ls and also add handy aliases
-if [ "$TERM" != "dumb" ]; then
+if [ "$TERM" != "dumb" ] && (command -v dircolors &>/dev/null ); then
     [[ -f $HOME/.lscolor256 ]] && eval $(dircolors -b $HOME/.lscolor256) || eval $(dircolors -b)
     alias ls='ls --color=auto'
-    #alias dir='ls --color=auto --format=vertical'
-    #alias vdir='ls --color=auto --format=long'
 fi
 
 # some more ls aliases
 alias ll='ls -l'
-#alias la='ls -A'
-#alias l='ls -CF'
 
 bind '"": history-search-backward'
 bind '"": history-search-forward'
@@ -82,11 +83,6 @@ if [ -f /etc/bash_completion ]; then
    . /etc/bash_completion
 fi
 
-# This line was appended by KDE
-# Make sure our customised gtkrc file is loaded.
-export GTK2_RC_FILES=$HOME/.gtkrc-2.0
-
-#change the prompt line
 #if [ "$TERM" = "linux" ]
 #then
 #we're on the system console or maybe telnetting in
@@ -98,11 +94,21 @@ export GTK2_RC_FILES=$HOME/.gtkrc-2.0
 
 export PATH=$PATH:$HOME/bin
 
+export PAGER=less LESS="-M -i -R --shift 5" LESSCHARSET=utf-8 READNULLCMD=less
+export LESS_TERMCAP_md=$'\e[1;34m'      #bold
+export LESS_TERMCAP_mb=$'\e[1;33m'      #blinking
+export LESS_TERMCAP_me=$'\e[m'          #end all modes
+export LESS_TERMCAP_so=$'\e[01;7;34m'   #search highlight, standout mode
+export LESS_TERMCAP_se=$'\e[m'          #end standout mode
+export LESS_TERMCAP_us=$'\e[1;32m'      #underlining
+export LESS_TERMCAP_ue=$'\e[m'          #end underlining
+
 # add Intel Compiler environment variables
 #source /opt/intel/fc/9.1.036/bin/ifortvars.sh
 #source $HOME/.context_env /home/roylez/soft/ConTeXt/tex
-export EDITOR=vim
-export VISUAL=vim
+if (command -v vim &>/dev/null ); then
+    export EDITOR=vim VISUAL=vim
+else
+    export EDITOR=vi VISUAL=vi
+fi
 
-
-PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
