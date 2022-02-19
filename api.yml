@@ -1,9 +1,0 @@
-- hosts:
-    - localhost
-  remote_user: '{{ remote_user }}'
-  roles:
-    - vps
-    - swarm
-    - webhook
-    - restic
-    - access
