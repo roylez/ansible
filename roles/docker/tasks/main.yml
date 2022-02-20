@@ -38,5 +38,5 @@
     minute: 13
     job: /usr/local/bin/docker-clean
 
-- include: compose.yml
-  when: ansible_architecture == "x86_64"
+# - include: compose.yml
+#   when: ansible_architecture == "x86_64"
