@@ -1,3 +1,4 @@
 {
-  "log-level": "warn"
+  "log-level": "warn",
+  "userland-proxy": false
 }
