@@ -7,8 +7,6 @@ swarm_server:        "{{ vault_swarm_server        }}"
 gitlab_user:     "{{ vault_gitlab_user }}"
 gitlab_password: "{{ vault_gitlab_password }}"
 
-cloak_image_url: "{{ vault_cloak_image_url }}"
-
 ssh_key_name:    id_ed25519
 ssh_private_key: "{{ vault_ssh_private_key }}"
 ssh_public_key:  "{{ vault_ssh_public_key  }}"
