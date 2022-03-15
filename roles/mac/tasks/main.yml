@@ -1,0 +1,25 @@
+---
+
+- name: fail if not a mac
+  when: ansible_distribution != "MacOSX"
+  fail:
+    msg: Not a MacOSX machine!
+
+- name: ensuring homebrew is installed
+  stat:
+    path: /opt/homebrew/bin/brew
+  register: homebrew
+
+- name: fail if homebrew is not installed
+  fail:
+    msg: Homebrew is missing... install from http://brew.sh/
+  when: not homebrew.stat.exists
+
+- name: ensure auto_smb is in auto_master
+  lineinfile:
+    name: /etc/auto_master
+    line: "/-  auto_smb  -nosuid,noowners"
+  become: yes
+
+- name: install packages
+  homebrew: name={{ packages }} state=present

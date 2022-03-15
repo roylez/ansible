@@ -1,5 +1,3 @@
-user: roy
-
 swarm_token:         "{{ vault_swarm_token         }}"
 swarm_manager_token: "{{ vault_swarm_manager_token }}"
 swarm_server:        "{{ vault_swarm_server        }}"

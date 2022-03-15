@@ -1,0 +1,23 @@
+---
+
+packages:
+  - coreutils
+  - direnv
+  - fd
+  - findutils
+  - fzf
+  - gawk
+  - git
+  - gnu-sed
+  - gnu-tar
+  - htop
+  - hub
+  - jq
+  - lf
+  - lftp
+  - p7zip
+  - ripgrep
+  - stow
+  - tmux
+  - zoxide
+  - yqrashawn/goku/goku

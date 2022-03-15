@@ -5,3 +5,6 @@
     - vps
     - tailscale
     - swarm
+  var_files:
+    - vaulted_vars/vault.yml
+    - vaulted_vars/vars.yml

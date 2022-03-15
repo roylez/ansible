@@ -10,6 +10,9 @@ playbook:
 proxmox:
 	ansible-playbook proxmox.yml
 
+mac:
+	ansible-playbook --ask-become-pass mac.yml
+
 role:
 	ansible localhost -o --ask-vault-pass -m include_role -a name=$(role)
 
