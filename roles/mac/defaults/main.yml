@@ -22,10 +22,10 @@ packages:
   - zoxide
   - yqrashawn/goku/goku
   # casks
-  - homebrew/cask/qview
-  - homebrew/cask/macvim
-  - homebrew/cask/hiddenbar
-  - homebrew/cask/rar
-  - homebrew/cask/font-iosevka-nerd-font
-  - homebrew/cask/font-fantasque-sans-mono-nerd-font
-  - homebrew/cask/iina
+  # - homebrew/cask/qview
+  # - homebrew/cask/macvim
+  # - homebrew/cask/hiddenbar
+  # - homebrew/cask/rar
+  # - homebrew/cask/font-iosevka-nerd-font
+  # - homebrew/cask/font-fantasque-sans-mono-nerd-font
+  # - homebrew/cask/iina

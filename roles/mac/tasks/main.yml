@@ -23,3 +23,6 @@
 
 - name: install packages
   homebrew: name={{ packages }} state=present
+
+- name: use JPG as default screenshot format
+  command: defaults write com.apple.screencapture type jpg
