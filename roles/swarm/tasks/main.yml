@@ -4,6 +4,6 @@
   register: swarm_active
 
 - name: join swarm
-  command: docker swarm join --token {{ token }} --advertise-addr {{ advertise_addr }} {{ manager }}
+  command: docker swarm join --token {{ token }} {{ manager }}
   ignore_errors: yes
   when: swarm_active.rc != 0

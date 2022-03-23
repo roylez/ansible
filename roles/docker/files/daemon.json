@@ -1,5 +1,6 @@
 {
   "log-level": "warn",
   "dns-opts": ["use-vc"],
+  "swarm-default-advertise-addr": "tailscale0",
   "userland-proxy": false
 }
