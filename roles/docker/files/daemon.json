@@ -1,4 +1,5 @@
 {
   "log-level": "warn",
+  "dns-opts": ["use-vc"],
   "userland-proxy": false
 }
