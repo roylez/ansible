@@ -1,7 +1,6 @@
 ---
 
 user_groups:
-  - docker
   - adm
 user_shell:      /usr/bin/zsh
 user_gh_nick:    roylez

@@ -38,5 +38,8 @@
     minute: 13
     job: /usr/local/bin/docker-clean
 
+- name: append docker group to user
+  user: name={{ user }} groups=docker append=yes
+
 # - include: compose.yml
 #   when: ansible_architecture == "x86_64"

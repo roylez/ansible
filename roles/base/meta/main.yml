@@ -3,6 +3,4 @@
 dependencies:
   - role: taming
   - role: optimization
-  - role: docker
   - role: hardening
-  - role: kopia

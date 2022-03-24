@@ -1,6 +1,7 @@
 {
   "log-level": "warn",
   "dns-opts": ["use-vc"],
-  "swarm-default-advertise-addr": "tailscale0",
+  "swarm-default-advertise-addr": "{{ advertise_addr }}",
+  "mtu": {{ mtu }},
   "userland-proxy": false
 }
