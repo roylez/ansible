@@ -6,8 +6,9 @@
     - kopia
     - tailscale
     - role: docker
-      docker_mtu: 1280
-      swarm_advertise_addr: tailscale0
+      vars:
+        docker_mtu: 1280
+        swarm_advertise_addr: tailscale0
     - swarm
   vars_files:
     - vaulted_vars/vault.yml
