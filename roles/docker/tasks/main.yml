@@ -21,8 +21,8 @@
   file: path=/etc/docker state=directory
 
 - name: config docker daemon
-  copy:
-    src: daemon.json
+  template:
+    src: daemon.json.j2
     dest: /etc/docker/daemon.json
   notify: reload_docker
 
