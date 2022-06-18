@@ -2,9 +2,10 @@
 
 packages:
   - coreutils
+  - moreutils
+  - findutils
   - direnv
   - fd
-  - findutils
   - fzf
   - gawk
   - git
