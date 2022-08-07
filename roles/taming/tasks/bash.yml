@@ -3,3 +3,7 @@
   copy: src={{item}} dest=/root/.{{ item }}
   with_items: [bashrc, bash_profile, lscolor256]
   become: yes
+
+- name: change default shell to bash for root
+  user: name=root shell=/bin/bash
+  become: yes
