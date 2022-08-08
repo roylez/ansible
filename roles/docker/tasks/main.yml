@@ -41,5 +41,12 @@
 - name: append docker group to user
   user: name={{ user }} groups=docker append=yes
 
+- name: create network for tailscale
+  when: ansible_tailscale0 is defined and create_tailscale_network
+  docker_network:
+    name: tailscale
+    driver_options:
+      com.docker.network.bridge.host_binding_ipv4: "{{ ansible_tailscale0.ipv4.address }}"
+
 # - include: compose.yml
 #   when: ansible_architecture == "x86_64"

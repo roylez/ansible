@@ -1,3 +1,4 @@
-docker_compose_version: 1.26.0
-swarm_advertise_addr:   ""
-docker_mtu:             0
+docker_compose_version:   1.26.0
+swarm_advertise_addr:     ""
+docker_mtu:               0
+create_tailscale_network: False
