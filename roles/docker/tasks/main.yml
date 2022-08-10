@@ -48,8 +48,5 @@
     driver_options:
       com.docker.network.bridge.host_binding_ipv4: "{{ ansible_tailscale0.ipv4.address }}"
 
-- name: install docker-py
-  pip: name=docker
-
 # - include: compose.yml
 #   when: ansible_architecture == "x86_64"

@@ -13,3 +13,6 @@
 - name: refresh apt cache
   when: docker_repo_added.changed
   apt: update_cache=yes
+
+- name: install docker-py
+  apt: name=python3-docker
