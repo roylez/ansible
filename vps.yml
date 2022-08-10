@@ -12,7 +12,7 @@
         docker_mtu: 1280
         swarm_advertise_addr: tailscale0
         create_tailscale_network: True
-    - swarm
+    # - swarm
   vars_files:
     - vaulted_vars/vault.yml
     - vaulted_vars/vars.yml

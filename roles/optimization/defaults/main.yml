@@ -10,6 +10,7 @@ vps_packages:
 
 ubuntu_packages:
   - software-properties-common
+  - python-pip    # so that pip module is available for ansible
 
 update_dns: yes
 
