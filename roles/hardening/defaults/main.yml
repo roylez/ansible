@@ -2,6 +2,7 @@
 
 user_groups:
   - adm
+  - ssh-user
 user_shell:      /usr/bin/zsh
 user_gh_nick:    roylez
 
@@ -11,7 +12,7 @@ sshd_options:
   PasswordAuthentication: "no"
   PubkeyAuthentication:   "yes"
   PermitRootLogin:        "no"
-  AllowUsers:             "{{ user }}"
+  AllowGroups:            ssh-user
 
 packages:
   - fail2ban

@@ -20,5 +20,4 @@
     force: yes
 
 - name: append groups to users
-  with_items: '{{ user_groups  }}'
-  user: name={{ user }} groups={{ item }} append=yes
+  user: name={{ user }} groups={{ user_groups }} append=yes
