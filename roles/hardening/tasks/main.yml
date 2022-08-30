@@ -9,6 +9,9 @@
   with_items: [ 10periodic, 50unattended-upgrades ]
   when: ansible_distribution == "Ubuntu"
 
+- name: create a group for ssh enabled users
+  group: name=ssh-user state=present
+
 - name: update sshd_config
   lineinfile:
     dest: /etc/ssh/sshd_config
