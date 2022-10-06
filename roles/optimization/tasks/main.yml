@@ -25,6 +25,13 @@
     name: /etc/gai.conf
     line: "precedence ::ffff:0:0/96  100"
 
+- name: restrict systemd-journald log file size
+  lineinfile:
+    dest: /etc/systemd/journald.conf
+    line: "SystemMaxUse=100M"
+    regexp: ^SystemMaxUse=
+  when: ansible_os_family in ['Debian', 'RedHat']
+
 - include: swap.yml
 
 - include: bbr.yml
