@@ -30,3 +30,6 @@
     line: 'APT::Periodic::Unattended-Upgrade "0";'
     regexp: ^APT::Periodic::Unattended-Upgrade
     create: yes
+
+- name: disable phased upgrade
+  copy: src=33disable-phased-upgrade dest=/etc/apt/apt.conf.d
