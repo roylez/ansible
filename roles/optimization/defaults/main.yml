@@ -8,6 +8,8 @@ vps_packages:
   - unzip
   - iftop
   - gpg
+  - sudo
+  - rsync
 
 ubuntu_packages:
   - software-properties-common
